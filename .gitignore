@@ -1,0 +1,21 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+[Bb]in/
+[Oo]bj/
+[Cc]omponents/
+.nuget/
+log/
+packages/
+artifacts/
+*DS_Store
+*.user
+*.suo
+*.vspscc
+*.userprefs
+*.dbmdl
+*.sln.ide
+*.userprefs
+*.dbmdl
+*.apk
+_ReSharper.*
+/.vs
+*.jfm
