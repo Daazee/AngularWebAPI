@@ -19,3 +19,6 @@ artifacts/
 _ReSharper.*
 /.vs
 *.jfm
+*.Web.config
+src/AngularWebAPI.WEBAPI/Web.config
+src/AngularWebAPI.Web/Web.config
