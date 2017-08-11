@@ -1,30 +1,4 @@
-﻿<!--<div class="form-horizontal" role="form">
-    <div class="">
-        <div class="row">
-            <div class="form-group">
-                <label class="control-label col-md-2">Lastname</label>
-                <div class="col-md-10">
-                    <input type="text" ng-model="model.Lastname" class="form-control" />
-                </div>
-            </div>           
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-4">
-                <label class="control-label col-md-2">Firstname</label>               
-                    <input type="text" ng-model="model.Firstname" class="form-control" />            
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" id="Save" ng-click="model.addEmployee()" />
-                <input type="submit" value="Clear" class="btn btn-danger" id="Clear" style="margin-left:20px;" ng-click="model.clear()" />
-            </div>
-        </div>
-    </div>
-</div>-->
-
-<div class="panel panel-success">
+﻿<div class="panel panel-success">
     <div class="panel-heading">
         <h3>Create New Employee</h3>
     </div>
@@ -43,9 +17,41 @@
             </div>
         </div>
         <br />
-        <div class="col-md-4">
-            <input type="submit" value="Save" class="btn btn-default" id="Save" ng-click="model.addEmployee()" />
-            <input type="submit" value="Clear" class="btn btn-danger" id="Clear" style="margin-left:20px;" ng-click="model.clear()" />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Date Of Birth</label>
+                <input type="date" ng-model="model.dateOfBirth" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Gender</label>
+                <select ng-model="model.gender" class="form-control">
+                    <option></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Position</label>
+                <select ng-model="model.position" class="form-control">
+                    <option></option>
+                    <option value="Manager">Manager</option>
+                    <option value="Developer">Developer</option>
+                    <option value="ProjectManager">Project Manager</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <input type="submit" value="Save" class="btn btn-success" id="Save" ng-click="model.addEmployee()" />
+                <input type="submit" value="Clear" class="btn btn-danger" id="Clear" style="margin-left:20px;" ng-click="model.clear()" />
+            </div>
         </div>
     </div>
 </div>
