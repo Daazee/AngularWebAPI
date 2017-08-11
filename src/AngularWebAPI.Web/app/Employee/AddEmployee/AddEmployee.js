@@ -8,7 +8,8 @@
         controller: function(){
             var model = this;
             model.addEmployee = function () {
-            alert("My fullname is " + model.lastname + ' ' + model.firstname);
+                 
+            alert("My fullname is " + model.Lastname + ' ' + model.Firstname);
         };
 
         }

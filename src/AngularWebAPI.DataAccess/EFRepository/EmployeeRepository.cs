@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AngularWebAPI.Abstractions.EFRepository
+namespace AngularWebAPI.DataAccess.EFRepository
 {
     public class EmployeeRepository: GenericRepository<Employee>, IEmployeeRepository
     {

@@ -1,0 +1,24 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--@Html.ActionLink("Employee Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#/EmployeeList">List</a></li>
+                <li><a href="#/AddEmployee">Add Employee</a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ng-outlet></ng-outlet>
+</div>

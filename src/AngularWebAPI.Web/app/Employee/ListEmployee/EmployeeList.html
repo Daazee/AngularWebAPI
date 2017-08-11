@@ -1,10 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
+﻿<div>
+<table class="table">
+<tr>
+    <th>Lastname</th>
+    <th>Firstname</th>
+    <th>Gender</th>
+    <th>Date Of Birth</th>
+    <th>Position</th>
+</tr>
+    <tr ng-repeat="employee in model.employees">
+        <td>{{employee.Lastname}}</td>
+        <td>{{employee.Firstname}}</td>
+        <td>{{employee.DateOfBirth}}</td>
+        <td>{{employee.Position}}</td>
+    </tr>
+</table>
 
-</body>
-</html>
+
+
+</div>
