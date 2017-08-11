@@ -97,7 +97,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Site.css" />
     <Content Include="app\Common\module.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.html" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.js" />
     <Content Include="app\Employee\EditEmployee\EditEmployee.html" />
