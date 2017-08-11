@@ -19,3 +19,4 @@ artifacts/
 _ReSharper.*
 /.vs
 *.jfm
+*.Web.config

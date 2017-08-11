@@ -15,7 +15,7 @@ namespace AngularWebAPI.WEBAPI.App_Start
     using Abstractions.Interface;
     using System.Web.Http;
     using WebApiContrib.IoC.Ninject;
-    using Abstractions.EFRepository;
+    using DataAccess.EFRepository;
 
     public static class NinjectWebCommon 
     {

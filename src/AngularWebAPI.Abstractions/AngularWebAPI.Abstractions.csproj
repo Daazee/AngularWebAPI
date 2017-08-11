@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFRepository\EmployeeRepository.cs" />
-    <Compile Include="EFRepository\GenericRepository.cs" />
     <Compile Include="Interface\IEmployeeRepository.cs" />
     <Compile Include="Interface\IRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,10 +51,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AngularWebAPI.DataAccess\AngularWebAPI.DataAccess.csproj">
-      <Project>{cdd6438f-a041-46da-8151-26cd8919ffa3}</Project>
-      <Name>AngularWebAPI.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AngularWebAPI.Domain\AngularWebAPI.Domain.csproj">
       <Project>{e083e299-df45-40fd-a240-75857cd90712}</Project>
       <Name>AngularWebAPI.Domain</Name>

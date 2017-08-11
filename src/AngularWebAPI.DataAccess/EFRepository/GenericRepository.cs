@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AngularWebAPI.Abstractions.EFRepository
+namespace AngularWebAPI.DataAccess.EFRepository
 {
     public class GenericRepository<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
