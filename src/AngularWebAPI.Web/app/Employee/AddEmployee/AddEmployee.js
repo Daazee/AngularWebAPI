@@ -34,7 +34,7 @@
             var model = this;
 
             model.addEmployee = function () {
-
+                 
             alert("My fullname is " + model.Lastname + ' ' + model.Firstname);
         };
 
