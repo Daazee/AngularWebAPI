@@ -5,8 +5,10 @@
    function controller($http) {
 
        function fetchEmployees($http) {
-           return $http.get("http://localhost/AngularWebAPI.WebAPI/api/Employee")
-           .then(function(response){
+           return $http.get("http://localhost:18558//api/Employee")
+           .then(function (response) {
+               console.log(response)
+               return response.data
 
 });
        }
@@ -16,6 +18,7 @@
        model.$onInit = function () {
            fetchEmployees($http).then(function(employees){
                model.employees = employees;
+               alert(model.employees);
            });
        };
    }

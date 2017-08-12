@@ -3,9 +3,11 @@ using AngularWebAPI.Domain.Entities;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
+    [EnableCorsAttribute("http://localhost:6285", "*", "*")]
     public class EmployeeController : ApiController
     {
         private IEmployeeRepository Employees;
