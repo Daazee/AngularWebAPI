@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Entities\Dependant.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\EmployeeImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

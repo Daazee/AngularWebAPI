@@ -15,6 +15,7 @@ namespace AngularWebAPI.DataAccess.DataAccess
 
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Dependant> Dependant { get; set; }
+        public DbSet<EmployeeImage> EmployeeImage { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

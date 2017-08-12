@@ -10,7 +10,9 @@ namespace AngularWebAPI.Abstractions.Interface
     {
         Task<TEntity> GetItemAsync(int id);
         Task<IEnumerable<TEntity>> GetItemsAsync();
-        Task<int> AddItemAsync(TEntity item);        
+        Task<int> AddItemAsync(TEntity item);
         Task<int> UpdateItemAsync(TEntity item);
+        Task<TEntity> RemoveItemAsync(int id);
+
     }
 }

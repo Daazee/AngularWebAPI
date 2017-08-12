@@ -1,5 +1,6 @@
 ﻿using AngularWebAPI.Abstractions.Interface;
 using AngularWebAPI.Domain.Entities;
+using AngularWebAPI.WEBAPI.Models;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -78,17 +79,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
             try
             {
                 var query = await Employees.GetItemAsync(id);
-                if (query != null)
-                {
-                    //query = new Employee
-                    //{
-                    //    Firstname = employee.Firstname,
-                    //    Lastname = employee.Lastname,
-                    //    Gender = employee.Gender,
-                    //    DateOfBirth = employee.DateOfBirth,
-                    //    EmployeeID = employee.EmployeeID,
-                    //    Position = employee.Position
-                    //};
+                if (query != null && ModelState.IsValid)
+                {                    
                     await Employees.UpdateItemAsync(employee);
                     return Ok();
                 }
@@ -124,9 +116,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        
+        }      
 
     }
 }
