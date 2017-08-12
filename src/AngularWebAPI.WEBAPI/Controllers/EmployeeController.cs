@@ -1,19 +1,23 @@
 ﻿using AngularWebAPI.Abstractions.Interface;
 using AngularWebAPI.Domain.Entities;
 using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
+    [RoutePrefix("api/Employee")]
     public class EmployeeController : ApiController
     {
         private IEmployeeRepository Employees;
         public EmployeeController(IEmployeeRepository employees)
         {
             Employees = employees;
-        }             
+        }
 
+        [Route("")]
         public async Task<IHttpActionResult> GET()
         {
             var employee = await Employees.GetItemsAsync();
@@ -23,21 +27,26 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 return NotFound();
         }
 
-        public async Task<IHttpActionResult> GET(int Id)
+       
+        [Route("{id}")]
+        public async Task<IHttpActionResult> GET(int id)
         {
             try
             {
-                var employee = await Employees.GetItemAsync(Id);
+                var employee = await Employees.GetItemAsync(id);
                 if (employee != null)
                     return Ok(employee);               
             }
             catch (Exception)
             {
-                throw;
+                //throw;
+                return BadRequest();
             }
             return NotFound();
         }
 
+        [HttpPost]
+        [Route("AddEmployee")]
         public async Task<IHttpActionResult> POST([FromBody]Employee Employee)
         {
             try
@@ -53,12 +62,17 @@ namespace AngularWebAPI.WEBAPI.Controllers
                     return BadRequest();
                 }               
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                // throw new HttpRequestException();
+                return BadRequest();
             }            
         }
 
+
+
+        [HttpPut]
+        [Route("UpdateEmployee/{id}")]
         public async Task<IHttpActionResult> PUT(int id, [FromBody]Employee employee)
         {
             try
@@ -66,16 +80,53 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 var query = await Employees.GetItemAsync(id);
                 if (query != null)
                 {
-                    var result = await Employees.UpdateItemAsync(query);
-                    return Ok(result);
+                    //query = new Employee
+                    //{
+                    //    Firstname = employee.Firstname,
+                    //    Lastname = employee.Lastname,
+                    //    Gender = employee.Gender,
+                    //    DateOfBirth = employee.DateOfBirth,
+                    //    EmployeeID = employee.EmployeeID,
+                    //    Position = employee.Position
+                    //};
+                    await Employees.UpdateItemAsync(employee);
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
-            }
-            return BadRequest();
+                return BadRequest();
+
+            }          
         }
+
+        [Route("DeleteEmployee")]
+        public async Task<IHttpActionResult> DELETE(int id)
+        {
+            try
+            {
+                var query = await Employees.GetItemAsync(id);
+                if(query != null)
+                {
+                    await Employees.RemoveItemAsync(query.EmployeeID);
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        
 
     }
 }
