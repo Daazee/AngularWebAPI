@@ -100,6 +100,7 @@
     <Content Include="app\Common\MainRoute.html" />
     <Content Include="app\Common\MainRoute.js" />
     <Content Include="app\Common\module.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.html" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.js" />
     <Content Include="app\Employee\EditEmployee\EditEmployee.html" />
@@ -138,6 +139,12 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -155,12 +162,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\Dependant\" />
