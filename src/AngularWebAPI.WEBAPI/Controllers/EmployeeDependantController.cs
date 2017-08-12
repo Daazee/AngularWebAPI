@@ -42,6 +42,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
         }
 
 
+        [HttpPost]
+        [Route("AddDependant")]
         public async Task<IHttpActionResult> POST([FromBody]Dependant dependant)
         {
             try
@@ -63,6 +65,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("UpdateDependant/{id}")]
         public async Task<IHttpActionResult> PUT(int id, [FromBody]Dependant dependant)
         {
             try
@@ -92,6 +96,29 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 return BadRequest();
             }
 
+        }
+
+        [HttpDelete]
+        [Route("DeleteDependant/{id}")]
+        public async Task<IHttpActionResult> DELETE(int id)
+        {
+            try
+            {
+                var query = await EmployeeDependant.GetItemAsync(id);
+                if (query != null)
+                {
+                    await EmployeeDependant.RemoveItemAsync(query.EmployeeID);
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }

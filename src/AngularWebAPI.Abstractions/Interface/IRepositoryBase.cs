@@ -8,6 +8,7 @@ namespace AngularWebAPI.Abstractions.Interface
 {
     public interface IRepositoryBase<TEntity> where TEntity: class
     {
+        IEnumerable<TEntity> GetEmployeeWithDependant();
         Task<TEntity> GetItemAsync(int id);
         Task<IEnumerable<TEntity>> GetItemsAsync();
         Task<int> AddItemAsync(TEntity item);
