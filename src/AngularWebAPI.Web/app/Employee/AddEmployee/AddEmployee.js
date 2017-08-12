@@ -6,31 +6,79 @@
     function controller($http) {
         var model = this;
         model.employee = [];
-        
-        model.addEmployee = function () {
-            var Employee = [];
-            model.employee.Lastname = model.lastname;
-            model.employee.Firstname = model.firstname;
-            model.employee.DateOfBirth = model.dateOfBirth;
-            model.employee.Gender = model.gender;
-            model.employee.Position = model.position;
-            alert(model.lastname);
+        model.employeeId = 0;
+        model.showPersonal1 = false;
+        model.showPersonal2 = false;
+        model.showPersonal3 = false;
 
-            Employee = model.employee
-            return $http.post(`${baseUrl}api/Employee//${Employee}`)
-            .then(function (response) {
-                console.log(response.data);
-                return response.data
+        model.addEmployee = function () {
+            var Employee = {};
+            Employee.Lastname = model.lastname;
+            Employee.Firstname = model.firstname;
+            Employee.DateOfBirth = model.dateOfBirth;
+            Employee.Gender = model.gender;
+            Employee.Position = model.position;
+
+            return $http.post(`${baseUrl}api/Employee/AddEmployee`, JSON.stringify(Employee))
+      .then(function (response) {
+          console.log(response.data);
+          model.employeeId = response.data.EmployeeID
+          console.log(model.employeeId);
+          return response.data
+      });
+        }
+
+        //    var request = $http({
+        //        url: baseUrl + "api/Employee/AddEmployee",
+        //        method: "post",
+        //        contentType: 'application/json',
+        //        data: JSON.stringify(Employee),
+        //        success: successFunc(response),
+        //        error: errorFunc(response)
+        //    });
+
+        //    function successFunc(response) {
+        //        console.log(response);
+        //        alert(response);
+        //        model.showPersonal1 = true;
+        //        model.showPersonal2 = true;
+        //    }
+
+        //    function errorFunc(error) {
+        //        //alert("Error occured");//To avoid alerting if no internet connection.
+        //        console.log(error);
+        //    }
+        //};
+
+        model.addDependant = function () {
+            var Dependant = {};
+            Dependant.Lastname = model.dependantLastname;
+            Dependant.Firstname = model.dependantFirstname;
+            Dependant.Gender = model.dependantGender;
+            Dependant.dependantRelationship = model.dependantRelationship;
+
+            var request = $http({
+                url: baseUrl + "api/Employee/AddEmployee",
+                method: "post",
+                contentType: 'application/json',
+                data: JSON.stringify(Employee),
+                success: successFunc(),
+                error: errorFunc()
             });
 
-           
-            //return $http.post(baseUrl + 'api/Employee/' + model.employee, JSON.stringify(model.employee), {
-            //    headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" }
-            //    }).then(function (response) {
-            //        return response;
-            //    })
+            function successFunc(response) {
+                console.log(response);
+                alert(response);
+                model.showPersonal2 = false;
+                model.showPersonal3 = true;
+            }
 
+            function errorFunc(error) {
+                //alert("Error occured");//To avoid alerting if no internet connection.
+                console.log(error);
+            }
         };
+
     }
 
     module.component("createEmployee", {
