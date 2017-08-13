@@ -93,7 +93,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 if (ModelState.IsValid)
                 {
                     var employee = await Employees.AddItemAsync(Employee);
-                    return Ok(employee);
+                    return Ok(Employee.EmployeeID);
                 }
                 else
                 {

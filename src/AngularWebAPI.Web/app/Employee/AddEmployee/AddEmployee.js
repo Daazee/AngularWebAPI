@@ -23,18 +23,35 @@
                     .then(function (response) {
                         model.employeeId = response.data
                         console.log(model.employeeId);
+                        model.showPersonal1 = true;
+                        model.showPersonal2 = true;
                         return response.data
                     });
         }
 
+        model.uploadPicture = function () {
+            var Dependant = {};
+           
+            //return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
+            //       .then(function (response) {
+            //           model.employeeId = response.data
+            //           console.log(model.employeeId);
+            //           return response.data
+            //       });
+            model.showPersonal2 = false;
+            model.showPersonal3 = true;
+        };
 
 
         model.addDependant = function () {
             var Dependant = {};
+            alert(model.dependantLastname);
+            Dependant.EmployeeId = model.employeeId;
+            alert(Dependant.EmployeeId);
             Dependant.Lastname = model.dependantLastname;
             Dependant.Firstname = model.dependantFirstname;
             Dependant.Gender = model.dependantGender;
-            Dependant.dependantRelationship = model.dependantRelationship;
+            Dependant.Relationship = model.dependantRelationship;
 
             return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
                    .then(function (response) {

@@ -7,10 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
-
+    [EnableCorsAttribute("http://localhost:6285", "*", "*")]
     [RoutePrefix("api/EmployeeDependant")]
     public class EmployeeDependantController : ApiController
     {
