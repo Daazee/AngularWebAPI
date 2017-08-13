@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal2">
-            Upload Picture will show here
+            <input ng-model='file' type="file" />
             <input type="submit" ng-click="model.uploadPicture()" value="Next" class="btn btn-primary pull-right" />
         </div>
         <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal3">
@@ -88,7 +88,7 @@
                 <input type="submit" ng-click="model.addDependant()" value="Save" class="btn btn-primary pull-right"/>
             </div>
 
-
+            <br />
            <div class="table-responsive">
                <table class="table">
                   <thead>

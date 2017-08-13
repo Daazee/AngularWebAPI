@@ -1,9 +1,11 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-heading">
-        <h4>Overview</h4>
+        <h4>Employee Overview</h4>
     </div>
     <div class="row panel-body">
-       
+        <div class="col-md-4">
+            <img src="../../../Content/lampSqure.jpg" class="img-circle img-responsive img-thumbnail " width="150" height="150" />
+        </div>
         <div class="col-xs-8">
             <strong>PERSONAL DETAIL</strong>
             <hr />
@@ -18,7 +20,7 @@
                 </tr>
                 <tr>
                     <th>Firstname: &nbsp;</th>
-                    <td>{{model.employee.lastname}}</td>
+                    <td>{{model.employee.firstname}}</td>
                 </tr>
                 <tr>
                     <th>Gender: &nbsp;</th>
@@ -34,15 +36,13 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-4">
-            <img src="../../../Content/lampSqure.jpg" class="img-circle img-responsive img-thumbnail pull-right" width="150" height="150" />
-        </div>
+        
     </div>
 
 
     <hr />
     <div class="table-responsive panel-body">
-        <strong>DEPENDANTS</strong>
+        <div class="text-center"><strong>DEPENDANTS</strong></div>
         <hr />
         <table class="table table-responsive table-striped">
             <thead>

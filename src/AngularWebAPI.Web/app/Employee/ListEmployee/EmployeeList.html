@@ -1,9 +1,9 @@
 ﻿
 
 <div>
-    <a ng-link="['AddEmployee']" class="btn btn bg-primary">
+    <!--<a ng-link="['AddEmployee']" class="btn btn bg-primary">
         Create New Employee
-    </a>
+    </a>-->
 </div>
 <br />
 <div class="panel panel-primary table-responsive">
@@ -30,15 +30,17 @@
                     <td>{{employee.dateOfBirth}}</td>
                     <td>{{employee.position}}</td>
                     <td>
-                        <a ng-link="['EmployeeDetail', {id:employee.employeeID}]" class="btn btn-success">
-                            <span class="glyphicon glyphicon-zoom-in"></span>
+                        <a ng-click="['EditEmployee', {id:employee.employeeID}]" class="btn btn-sm btn-primary">Edit
+                             <span class="glyphicon glyphicon-edit"></span>
+
                         </a>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" ng-click="model.deleteEmployee(employee.employeeID)">
+                        <a ng-link="['EmployeeDetail', {id:employee.employeeID}]" class="btn btn-sm btn-success">Detail
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                        </a>
+                        <a class="btn btn-danger btn-sm" ng-click="model.deleteEmployee(employee.employeeID)">Delete
                             <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
+                        </a>
+                    </td>                   
                 </tr>
             </tbody>
         </table>
