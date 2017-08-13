@@ -35,9 +35,9 @@
                         </a>
                     </td>
                     <td>
-                        <a ng-link="['DeleteEmployee', {id:employee.employeeID}]" class="btn btn-danger">
+                        <button class="btn btn-danger" ng-click="model.deleteEmployee(employee.employeeID)">
                             <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        </button>
                     </td>
                 </tr>
             </tbody>

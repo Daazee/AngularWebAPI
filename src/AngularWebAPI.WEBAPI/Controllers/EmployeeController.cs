@@ -18,7 +18,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
         public EmployeeController(IEmployeeRepository employees)
         {
             Employees = employees;
-            
+
         }
 
         [Route("")]
@@ -31,7 +31,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 return NotFound();
         }
 
-       
+
         [Route("{id}")]
         public async Task<IHttpActionResult> GET(int id)
         {
@@ -39,7 +39,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
             {
                 var employee = await Employees.GetItemAsync(id);
                 if (employee != null)
-                    return Ok(employee);               
+                    return Ok(employee);
             }
             catch (Exception)
             {
@@ -104,7 +104,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                     Gender = employee.Gender,
                     EmployeeID = employee.EmployeeID,
                     Position = employee.Position,
-                    Dependants = employee.Dependants.Select(d=> new DependantModel()
+                    Dependants = employee.Dependants.Select(d => new DependantModel()
                     {
                         EmployeeID = d.EmployeeID,
                         ID = d.ID,
@@ -113,8 +113,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
                         Gender = d.Gender,
                         Relationship = d.Relationship
                     }).ToList()
-                };  
-                
+                };
+
                 if (model != null)
                     return Ok(model);
             }
@@ -141,13 +141,13 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 {
                     ModelState.AddModelError("", "Unable to Create Employee");
                     return BadRequest();
-                }               
+                }
             }
             catch (Exception)
             {
                 // throw new HttpRequestException();
                 return BadRequest();
-            }            
+            }
         }
 
 
@@ -161,7 +161,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 var query = await Employees.GetItemAsync(id);
                 if (query != null && ModelState.IsValid)
                 {
-                    employee.EmployeeID = id;     
+                    employee.EmployeeID = id;
                     await Employees.UpdateItemAsync(employee);
                     return Ok();
                 }
@@ -174,7 +174,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
             {
                 return BadRequest();
 
-            }          
+            }
         }
 
         [HttpDelete]
@@ -183,23 +183,23 @@ namespace AngularWebAPI.WEBAPI.Controllers
         {
             try
             {
-                var query = await Employees.GetItemAsync(id);
-                if(query != null)
-                {
-                  //  await Employees.RemoveItemAsync(query.EmployeeID);
-                    return Ok();
+                //var query = await Employees.GetItemAsync(id);
+                //if(query != null)
+                //{
+                await Employees.RemoveItemAsync(id);
+                return Ok();
 
-                }
-                else
-                {
-                    return NotFound();
-                }
+            //    }
+            //    else
+            //    {
+            //        return NotFound();
+            //    }
             }
             catch (Exception ex)
             {
                 return BadRequest();
             }
-        }      
+        }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-heading">
-        <h4>Showing Details for {{model.firstname}} {{model.lastname}}</h4>
+        <h4>Overview</h4>
     </div>
     <div class="row panel-body">
        
@@ -13,24 +13,24 @@
                     <td>{{model.id}}</td>
                 </tr>
                 <tr>
+                    <th>Lastname: &nbsp;</th>
+                    <td>{{model.employee.lastname}}</td>
+                </tr>
+                <tr>
                     <th>Firstname: &nbsp;</th>
                     <td>{{model.employee.lastname}}</td>
                 </tr>
                 <tr>
-                    <th>Lastname: &nbsp;</th>
-                    <td>angular-Data</td>
-                </tr>
-                <tr>
                     <th>Gender: &nbsp;</th>
-                    <td>angular-Data</td>
+                    <td>{{model.employee.gender}}</td>
                 </tr>
                 <tr>
                     <th>Date-Of-Birth: &nbsp;</th>
-                    <td>angular-Data</td>
+                    <td>{{model.employee.dateOfBirth}}</td>
                 </tr>
                 <tr>
                     <th>Position: &nbsp;</th>
-                    <td>angular-Data</td>
+                    <td>{{model.employee.position}}</td>
                 </tr>
             </table>
         </div>

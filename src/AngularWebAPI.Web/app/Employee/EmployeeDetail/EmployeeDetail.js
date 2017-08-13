@@ -3,30 +3,39 @@
     var module = angular.module("employeeManagement");
     var baseUrl = "http://localhost:18558/";
 
-    function fetchEmployee(id) {
+    function fetchEmployee($http, id) {
         return $http.get(`${baseUrl}api/Employee/${id}`)
         .then(function (response) {
             console.log("employee detail")
-            console.log(response.data)
+            return response.data
+        });
+    }
+
+    function fetchDependantsByEmployeeID($http, id) {
+        return $http.get(`${baseUrl}/api/EmployeeDependant/GetDependantsByEmployeeID/${id}`)
+        .then(function (response) {
             return response.data
         });
     }
 
     function controller($http) {
         var model = this;
-        model.employee;
+        model.employee = [];
+        model.dependants = [];
         model.$routerOnActivate = function (next) {
             model.id = next.params.id
             console.log("params" + model.id)
-        model.$onInit = function () {
-            //fetchEmployees($http).then(function (employees) {
-            //    console.log(employees)
-            //    model.employees = employees;
-            //});
-            model.employee = fetchEmployee(model.id)
-            console.log (model.employee)
-        };
 
+            fetchEmployee($http, model.id).then(function (employee) {
+                console.log(employee)
+                model.employee = employee;
+            });
+
+            fetchDependantsByEmployeeID($http, model.id).then(function (dependants) {
+                console.log("My dependants")
+                console.log(dependants)
+                model.dependants = dependants;
+            });
         }
     }
 

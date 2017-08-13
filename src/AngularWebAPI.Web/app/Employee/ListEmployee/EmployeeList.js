@@ -20,6 +20,17 @@
                 model.employees = employees;
             });
         };
+
+        model.deleteEmployee = function (id) {
+            console.log(id)
+            if (confirm("Are you sure you want to delete this employee?")) {
+                return $http.delete(`${baseUrl}api/Employee/DeleteEmployee/${id}`)
+                            .then(function (response) {
+                                location.reload()
+                                //return response.data
+                            });
+            }
+        }
     }
 
     module.component("employeeList", {
