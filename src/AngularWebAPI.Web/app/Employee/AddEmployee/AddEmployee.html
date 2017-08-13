@@ -89,20 +89,26 @@
             </div>
 
 
-            <table class="table">
-                <tr>
-                    <th>Lastname</th>
-                    <th>Firstname</th>
-                    <th>Gender</th>
-                    <th>Relationship</th>
-                </tr>
-                <tr ng-repeat="dependant in model.dependants">
-                    <td>{{dependant.lastname}}</td>
-                    <td>{{dependant.firstname}}</td>
-                    <td>{{dependant.gender}}</td>
-                    <td>{{dependant.relationship}}</td>
-                </tr>
-            </table>
+           <div class="table-responsive">
+               <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Lastname</th>
+                          <th>Firstname</th>
+                          <th>Gender</th>
+                          <th>Relationship</th>
+                      </tr>
+                  </thead>
+                   <tbody>
+                       <tr ng-repeat="dependant in model.dependants">
+                           <td>{{dependant.lastname}}</td>
+                           <td>{{dependant.firstname}}</td>
+                           <td>{{dependant.gender}}</td>
+                           <td>{{dependant.relationship}}</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
         </div>
         <div class="col-md-2">&nbsp;</div>
     </div>
