@@ -1,11 +1,12 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-heading">
-        <h4>Employee Details for {{model.id}}</h4>
-        <hr />
+        <h4>Showing Details for {{model.firstname}} {{model.lastname}}</h4>
     </div>
-
-    <div class="row">
+    <div class="row panel-body">
+       
         <div class="col-xs-8">
+            <strong>PERSONAL DETAIL</strong>
+            <hr />
             <table class="table table-responsive table-striped">
                 <tr>
                     <th>Employee-ID: &nbsp;</th>
@@ -26,7 +27,7 @@
                 <tr>
                     <th>Date-Of-Birth: &nbsp;</th>
                     <td>angular-Data</td>
-                </tr>              
+                </tr>
                 <tr>
                     <th>Position: &nbsp;</th>
                     <td>angular-Data</td>
@@ -34,14 +35,14 @@
             </table>
         </div>
         <div class="col-md-4">
-            <img src="../../../Content/lampSqure.jpg" class="img-circle img-responsive img-thumbnail pull-right" width="50" height="50"  />
+            <img src="../../../Content/lampSqure.jpg" class="img-circle img-responsive img-thumbnail pull-right" width="150" height="150" />
         </div>
     </div>
 
 
     <hr />
-    <div class="table-responsive">
-        <strong>Dependants</strong>
+    <div class="table-responsive panel-body">
+        <strong>DEPENDANTS</strong>
         <hr />
         <table class="table table-responsive table-striped">
             <thead>
@@ -61,5 +62,11 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div>  
+</div>
+
+<div>
+    <a ng-link="['EmployeeList']" class="btn btn bg-primary pull-right">
+       Back to List
+    </a>
 </div>

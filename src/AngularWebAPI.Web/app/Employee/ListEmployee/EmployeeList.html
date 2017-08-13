@@ -1,8 +1,16 @@
-﻿<div><a ng-link="['AddEmployee']" class="btn btn bg-primary pull-right">Add Employee</a></div>
+﻿
+
+<div>
+    <a ng-link="['AddEmployee']" class="btn btn bg-primary">
+        Create New Employee
+    </a>
+</div>
+<br />
 <div class="panel panel-primary table-responsive">
     <div class="panel-heading">
         <h4>Employee List</h4>
     </div>
+  
     <div class="panel-body">
         <table class="table table-responsive table-striped">
             <thead>
@@ -22,8 +30,13 @@
                     <td>{{employee.dateOfBirth}}</td>
                     <td>{{employee.position}}</td>
                     <td>
-                        <a ng-link="['EmployeeDetail', {id:employee.employeeID}]" class="btn btn-default">
+                        <a ng-link="['EmployeeDetail', {id:employee.employeeID}]" class="btn btn-success">
                             <span class="glyphicon glyphicon-zoom-in"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a ng-link="['DeleteEmployee', {id:employee.employeeID}]" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>
                 </tr>
