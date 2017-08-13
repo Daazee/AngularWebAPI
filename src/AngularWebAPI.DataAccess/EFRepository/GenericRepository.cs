@@ -12,18 +12,14 @@ namespace AngularWebAPI.DataAccess.EFRepository
     public class GenericRepository<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
         protected AngularWebAPIDataContext _db = new AngularWebAPIDataContext();
+        
 
         public async Task<TEntity> GetItemAsync(int id)
         {
             var model = await _db.Set<TEntity>().FindAsync(id);
             return model;
-        }        
+        } 
 
-        public IEnumerable<TEntity> GetEmployeeWithDependant()
-        {
-            var result = _db.Set<TEntity>().ToList();
-            return result;
-        }
         // gets list of items async
         public async Task<IEnumerable<TEntity>> GetItemsAsync()
         {

@@ -10,5 +10,17 @@ namespace AngularWebAPI.DataAccess.EFRepository
 {
     public class EmployeeRepository: GenericRepository<Employee>, IEmployeeRepository
     {
+        public IEnumerable<Employee> GetEmployeesWithDependant()
+        {
+            var result = _db.Set<Employee>().Include("Dependants").ToList();
+            return result;
+        }
+
+        public Employee GetEmployeeWithDependant(int id)
+        {
+            var result = _db.Set<Employee>().Include("Dependants").Where(d => d.EmployeeID == id).FirstOrDefault();
+            return result;
+                                            
+        }
     }
 }

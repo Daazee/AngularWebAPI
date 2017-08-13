@@ -32,6 +32,6 @@ namespace AngularWebAPI.Domain.Entities
         [Required(ErrorMessage = "Firstname is Required")]        
         public string Gender { get; set; }
 
-        public IEnumerable<Dependant> Dependants { get; set; }
+        public List<Dependant> Dependants { get; set; }
     }
 }

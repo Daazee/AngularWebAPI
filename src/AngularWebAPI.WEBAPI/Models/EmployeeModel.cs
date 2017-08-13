@@ -21,6 +21,6 @@ namespace AngularWebAPI.WEBAPI.Models
               
         public string Gender { get; set; }
 
-        public IEnumerable<DependantModel> Dependants { get; set; }
+        public List<DependantModel> Dependants { get; set; }
     }
 }

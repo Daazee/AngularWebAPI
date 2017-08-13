@@ -11,7 +11,10 @@ namespace AngularWebAPI.DataAccess.DataAccess
 {
     public class AngularWebAPIDataContext: DbContext
     {
-        public AngularWebAPIDataContext(): base("AngularWebAPIDataContext")    {     }
+        public AngularWebAPIDataContext() : base("AngularWebAPIDataContext")
+        {
+            base.Configuration.ProxyCreationEnabled = false;
+        }
 
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Dependant> Dependant { get; set; }

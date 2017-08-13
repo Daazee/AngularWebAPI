@@ -15,6 +15,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
         public EmployeeController(IEmployeeRepository employees)
         {
             Employees = employees;
+            
         }
 
         [Route("")]
@@ -45,13 +46,14 @@ namespace AngularWebAPI.WEBAPI.Controllers
             return NotFound();
         }
 
-        [Route("EmployeeWithDependant/{id}")]
-        public IHttpActionResult GETEmployee(int id)
+
+        [Route("EmployeeDependant")]
+        public IHttpActionResult GETEmployeeDependant()
         {
             try
             {
-                
-                var employee = Employees.GetEmployeeWithDependant()
+
+                var employee = Employees.GetEmployeesWithDependant().ToList()
                                         .Select(f => new EmployeeModel()
                                         {
                                             Firstname = f.Firstname,
@@ -68,12 +70,52 @@ namespace AngularWebAPI.WEBAPI.Controllers
                                                 Lastname = d.Lastname,
                                                 Gender = d.Gender,
                                                 Relationship = d.Relationship
-                                            })
+                                            }).ToList()
                                         });
+
                 if (employee != null)
                     return Ok(employee);
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+                //throw;
+                return BadRequest();
+            }
+            return NotFound();
+        }
+
+
+
+        [Route("EmployeeDependant/{id}")]
+        public IHttpActionResult GETEmployeeDependant(int id)
+        {
+            try
+            {
+
+                var employee = Employees.GetEmployeeWithDependant(id);
+                var model = new EmployeeModel()
+                {
+                    Firstname = employee.Firstname,
+                    Lastname = employee.Lastname,
+                    DateOfBirth = employee.DateOfBirth,
+                    Gender = employee.Gender,
+                    EmployeeID = employee.EmployeeID,
+                    Position = employee.Position,
+                    Dependants = employee.Dependants.Select(d=> new DependantModel()
+                    {
+                        EmployeeID = d.EmployeeID,
+                        ID = d.ID,
+                        Firstname = d.Firstname,
+                        Lastname = d.Lastname,
+                        Gender = d.Gender,
+                        Relationship = d.Relationship
+                    }).ToList()
+                };  
+                
+                if (model != null)
+                    return Ok(model);
+            }
+            catch (Exception ex)
             {
                 //throw;
                 return BadRequest();
