@@ -1,0 +1,65 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Employee Details</h4>
+        <hr />
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8">
+            <table class="table table-responsive table-striped">
+                <tr>
+                    <th>Employee-ID: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>
+                <tr>
+                    <th>Firstname: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>
+                <tr>
+                    <th>Lastname: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>
+                <tr>
+                    <th>Gender: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>
+                <tr>
+                    <th>Date-Of-Birth: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>              
+                <tr>
+                    <th>Position: &nbsp;</th>
+                    <td>angular-Data</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <img src="../../../Content/lampSqure.jpg" class="img-circle img-responsive img-thumbnail pull-right" width="50" height="50"  />
+        </div>
+    </div>
+
+
+    <hr />
+    <div class="table-responsive">
+        <strong>Dependants</strong>
+        <hr />
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Gender</th>
+                    <th>Relationship</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dependant in model.dependants">
+                    <td>{{dependant.firstname}}</td>
+                    <td>{{dependant.lastname}}</td>
+                    <td>{{dependant.gender}}</td>
+                    <td>{{dependant.relationship}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

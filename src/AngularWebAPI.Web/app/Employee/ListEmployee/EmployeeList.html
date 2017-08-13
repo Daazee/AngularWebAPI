@@ -1,24 +1,28 @@
 ﻿
-<div class="panel panel-success">
+<div class="panel panel-primary table-responsive">
     <div class="panel-heading">
-        <h3>Employee List</h3>
+        <h4>Employee List</h4>
     </div>
     <div class="panel-body">
-        <table class="table">
-            <tr>
-                <th>Lastname</th>
-                <th>Firstname</th>
-                <th>Gender</th>
-                <th>Date Of Birth</th>
-                <th>Position</th>
-            </tr>
-            <tr ng-repeat="employee in model.employees">
-                <td>{{employee.lastname}}</td>
-                <td>{{employee.firstname}}</td>
-                <td>{{employee.gender}}</td>
-                <td>{{employee.dateOfBirth}}</td>
-                <td>{{employee.position}}</td>
-            </tr>
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Lastname</th>
+                    <th>Firstname</th>
+                    <th>Gender</th>
+                    <th>Date Of Birth</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in model.employees">
+                    <td>{{employee.lastname}}</td>
+                    <td>{{employee.firstname}}</td>
+                    <td>{{employee.gender}}</td>
+                    <td>{{employee.dateOfBirth}}</td>
+                    <td>{{employee.position}}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
