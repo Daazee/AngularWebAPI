@@ -100,6 +100,7 @@
     <Content Include="app\Common\MainRoute.html" />
     <Content Include="app\Common\MainRoute.js" />
     <Content Include="app\Common\module.js" />
+    <Content Include="app\Dependant\AddDependant\AddDependant.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.html" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.js" />
@@ -164,7 +165,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Dependant\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

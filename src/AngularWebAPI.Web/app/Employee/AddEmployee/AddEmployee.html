@@ -1,223 +1,93 @@
-﻿<div class="panel panel-success">
-    <div class="panel-heading">
-        <h3>Create New Employee</h3>
-    </div>
-    
-    <!--<div class="panel-body">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addEmployeeModal">Create New Employee</button>
-        <br />
-        <div id="addEmployeeModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4>Create New Employee</h4>
-                    </div>
-                    <div class="panel-body" role="form">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Firstname</label>
-                                <input type="text" ng-model="model.firstname" class="form-control" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Lastname</label>
-                                <input type="text" ng-model="model.lastname" class="form-control" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Date Of Birth</label>
-                                <input type="date" ng-model="model.dateOfBirth" class="form-control" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Gender</label>
-                                <select ng-model="model.gender" class="form-control">
-                                    <option></option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Position</label>
-                                <select ng-model="model.position" class="form-control">
-                                    <option></option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Developer">Developer</option>
-                                    <option value="ProjectManager">Project Manager</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="submit" value="Save" class="btn btn-success" id="Save" ng-click="model.addEmployee()" />                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+﻿
+
+<div class="container">
+    <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class1" id="NavigationCustomerDetail">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled" id="NavigationGarmentEntry">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled" id="NavigationPaymentDetail">3</a>
+                <p>Dependant</p>
             </div>
         </div>
-    </div>-->
+    </div>
+    <div class="row">
 
-    <div class="container">
-        <div class="row">
-            <section>
-                <div class="wizard">
-                    <div class="wizard-inner">
-                        <div class="connecting-line"></div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-folder-open"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li role="presentation" class="disabled">
-                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li role="presentation" class="disabled">
-                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-picture"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li role="presentation" class="disabled">
-                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <div class="tab-content">
-                                <div class="tab-pane active" role="tabpanel" id="step1">
-                                    <div class="step1">
-                                        <h5><strong>Employee Details</strong></h5>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="firstname">First Name</label>
-                                                <input type="text" ng-model="model.firstname" class="form-control" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="lastname">Last Name</label>
-                                                <input type="text" ng-model="model.lastname" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="dateOfBirth">Date Of Birth</label>
-                                                <input type="date" ng-model="model.dateOfBirth" class="form-control" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="gender">Gender</label>
-                                                <select ng-model="model.gender" class="form-control">
-                                                    <option></option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="position">Position</label>
-                                                <select ng-model="model.position" class="form-control">
-                                                    <option></option>
-                                                    <option value="Manager">Manager</option>
-                                                    <option value="Developer">Developer</option>
-                                                    <option value="ProjectManager">Project Manager</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline pull-right">
-                                        <li>
-                                            <input type="submit" value="Save and Continue" class="btn btn-primary next-step" ng-click="model.addEmployee()" />
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="step2">
-                                    <div class="step2">
-                                        <h5><strong>Employee Image</strong></h5>
-                                        <hr>
-                                        <div class="step_21">
-                                            <div class="row">
+        <div class="col-md-8 col-md-offset-2" ng-hide="model.showPersonal1">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" ng-model="model.firstname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" ng-model="model.lastname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date Of Birth</label>
+                <input type="date" ng-model="model.dateOfBirth" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select ng-model="model.gender" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <select ng-model="model.position" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Developer">Developer</option>
+                    <option value="ProjectManager">Project Manager</option>
+                </select>
+            </div>
 
-                                            </div>
-                                        </div>
-                                        <div class="step-22">
-
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="step3">
-                                    <div class="step33">
-                                        <h5><strong>Employee Dependant Details</strong></h5>
-                                        <hr>
-                                        <div class="row mar_ned">
-
-                                        </div>
-                                        <div class="row mar_ned">
-
-                                        </div>
-
-                                        <div class="row mar_ned">
-                                            <div class="col-md-4 col-xs-3">
-
-                                            </div>
-                                            <div class="col-md-8 col-xs-9">
-
-                                            </div>
-                                        </div>
-                                        <div class="row mar_ned">
-
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="complete">
-                                    <div class="step44">
-                                        <h5>Completed</h5>
-
-
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
+            <div class="">
+                <input type="submit" ng-click="model.addEmployee()" value="Next" class="btn btn-primary pull-right" />
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal2">
+            Upload Picture will show here
+            <input type="submit" ng-click="model.uploadPicture()" value="Next" class="btn btn-primary pull-right" />
+        </div>
+        <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal3">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" ng-model="model.dependantFirstname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" ng-model="model.dependantLastname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select ng-model="model.dependantGender" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Relationship</label>
+                <select ng-model="model.dependantRelationship" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Child">Child</option>
+                </select>
+            </div>
+
+            <div class="">
+                <input type="submit" ng-click="model.addDependant()" value="Save" class="btn btn-primary pull-right"/>
+            </div>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
     </div>
 </div>

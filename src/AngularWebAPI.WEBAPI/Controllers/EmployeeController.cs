@@ -3,11 +3,14 @@ using AngularWebAPI.Domain.Entities;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Linq;
 using AngularWebAPI.WEBAPI.Models;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
+
+    [EnableCorsAttribute("http://localhost:6285", "*", "*")]
     [RoutePrefix("api/Employee")]
     public class EmployeeController : ApiController
     {
@@ -125,14 +128,14 @@ namespace AngularWebAPI.WEBAPI.Controllers
 
         [HttpPost]
         [Route("AddEmployee")]
-        public async Task<IHttpActionResult> POST([FromBody]Employee Employee)
+        public async Task<IHttpActionResult> POST(Employee Employee)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var employee = await Employees.AddItemAsync(Employee);
-                    return Ok(employee);
+                    return Ok(Employee.EmployeeID);
                 }
                 else
                 {
@@ -183,8 +186,9 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 var query = await Employees.GetItemAsync(id);
                 if(query != null)
                 {
-                    await Employees.RemoveItemAsync(query.EmployeeID);
+                  //  await Employees.RemoveItemAsync(query.EmployeeID);
                     return Ok();
+
                 }
                 else
                 {
