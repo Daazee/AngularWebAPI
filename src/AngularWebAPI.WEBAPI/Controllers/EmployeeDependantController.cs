@@ -42,6 +42,17 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 return BadRequest();
         }
 
+        [Route("GetDependantsByEmployeeID/{id}")]
+        public async Task<IHttpActionResult> GETDependantsByEmployeeID(int id)
+        {
+            var dependant = EmployeeDependant.GetDependants(id);
+            if (dependant != null)
+                return Ok(dependant);
+            else
+                return BadRequest();
+        }
+
+
 
         [HttpPost]
         [Route("AddDependant")]

@@ -6,6 +6,7 @@
     function controller($http) {
         var model = this;
         model.employee = [];
+        model.dependants = [];
         model.employeeId = 0;
         model.showPersonal1 = false;
         model.showPersonal2 = false;
@@ -31,7 +32,7 @@
 
         model.uploadPicture = function () {
             var Dependant = {};
-           
+
             //return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
             //       .then(function (response) {
             //           model.employeeId = response.data
@@ -55,11 +56,25 @@
 
             return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
                    .then(function (response) {
-                       model.employeeId = response.data
-                       console.log(model.employeeId);
-                       return response.data
+                       console.log("Added Dependants");
+                       console.log(response.data);
+                       model.employeeId = response.data.employeeID
+                       fetchDependantsByEmployeeID($http, model.employeeId).then(function (dependants) {
+                           console.log("My dependants")
+                           console.log(dependants)
+                           model.dependants = dependants;
+                       });
                    });
         };
+
+
+
+        function fetchDependantsByEmployeeID($http, id) {
+            return $http.get(`${baseUrl}/api/EmployeeDependant/GetDependantsByEmployeeID/${id}`)
+            .then(function (response) {
+                return response.data
+            });
+        }
 
     }
 

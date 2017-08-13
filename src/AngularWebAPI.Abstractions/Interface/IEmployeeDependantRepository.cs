@@ -9,5 +9,6 @@ namespace AngularWebAPI.Abstractions.Interface
 {
     public interface IEmployeeDependantRepository: IRepositoryBase<Dependant>
     {
+        IEnumerable<Dependant> GetDependants(int EmployeeID);
     }
 }
