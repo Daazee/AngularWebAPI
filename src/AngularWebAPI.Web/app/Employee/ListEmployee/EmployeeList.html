@@ -1,4 +1,4 @@
-﻿
+﻿<div><a ng-link="['AddEmployee']" class="btn btn bg-primary pull-right">Add Employee</a></div>
 <div class="panel panel-primary table-responsive">
     <div class="panel-heading">
         <h4>Employee List</h4>
@@ -21,6 +21,11 @@
                     <td>{{employee.gender}}</td>
                     <td>{{employee.dateOfBirth}}</td>
                     <td>{{employee.position}}</td>
+                    <td>
+                        <a ng-link="['EmployeeDetail', {id:employee.employeeID}]" class="btn btn-default">
+                            <span class="glyphicon glyphicon-zoom-in"></span>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

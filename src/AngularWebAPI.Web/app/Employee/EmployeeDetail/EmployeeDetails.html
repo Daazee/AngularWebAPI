@@ -1,6 +1,6 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-heading">
-        <h4>Employee Details</h4>
+        <h4>Employee Details for {{model.id}}</h4>
         <hr />
     </div>
 
@@ -9,11 +9,11 @@
             <table class="table table-responsive table-striped">
                 <tr>
                     <th>Employee-ID: &nbsp;</th>
-                    <td>angular-Data</td>
+                    <td>{{model.id}}</td>
                 </tr>
                 <tr>
                     <th>Firstname: &nbsp;</th>
-                    <td>angular-Data</td>
+                    <td>{{model.employee.lastname}}</td>
                 </tr>
                 <tr>
                     <th>Lastname: &nbsp;</th>
