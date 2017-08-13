@@ -12,13 +12,18 @@ namespace AngularWebAPI.DataAccess.EFRepository
     {
         public IEnumerable<Employee> GetEmployeesWithDependant()
         {
-            var result = _db.Set<Employee>().Include("Dependants").ToList();
+            var result = _db.Set<Employee>()
+                        .Include("Dependants")
+                        .ToList();
             return result;
         }
 
         public Employee GetEmployeeWithDependant(int id)
         {
-            var result = _db.Set<Employee>().Include("Dependants").Where(d => d.EmployeeID == id).FirstOrDefault();
+            var result = _db.Set<Employee>()
+                            .Include("Dependants")
+                            .Where(d => d.EmployeeID == id)
+                            .FirstOrDefault();
             return result;
                                             
         }
