@@ -70,6 +70,8 @@ namespace AngularWebAPI.WEBAPI.App_Start
         {
             kernel.Bind<DbContext>().To<AngularWebAPIDataContext>();
             kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
+            kernel.Bind<IEmployeeDependantRepository>().To<EmployeeDependantRepository>();
+            kernel.Bind<IEmployeeImageRepository>().To<EmployeeImageRepository>();
         }        
     }
 }

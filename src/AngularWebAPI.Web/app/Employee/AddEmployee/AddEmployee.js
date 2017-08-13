@@ -20,35 +20,14 @@
             Employee.Position = model.position;
 
             return $http.post(`${baseUrl}api/Employee/AddEmployee`, JSON.stringify(Employee))
-      .then(function (response) {
-          console.log(response.data);
-          model.employeeId = response.data.EmployeeID
-          console.log(model.employeeId);
-          return response.data
-      });
+                    .then(function (response) {
+                        model.employeeId = response.data
+                        console.log(model.employeeId);
+                        return response.data
+                    });
         }
 
-        //    var request = $http({
-        //        url: baseUrl + "api/Employee/AddEmployee",
-        //        method: "post",
-        //        contentType: 'application/json',
-        //        data: JSON.stringify(Employee),
-        //        success: successFunc(response),
-        //        error: errorFunc(response)
-        //    });
 
-        //    function successFunc(response) {
-        //        console.log(response);
-        //        alert(response);
-        //        model.showPersonal1 = true;
-        //        model.showPersonal2 = true;
-        //    }
-
-        //    function errorFunc(error) {
-        //        //alert("Error occured");//To avoid alerting if no internet connection.
-        //        console.log(error);
-        //    }
-        //};
 
         model.addDependant = function () {
             var Dependant = {};
@@ -57,26 +36,12 @@
             Dependant.Gender = model.dependantGender;
             Dependant.dependantRelationship = model.dependantRelationship;
 
-            var request = $http({
-                url: baseUrl + "api/Employee/AddEmployee",
-                method: "post",
-                contentType: 'application/json',
-                data: JSON.stringify(Employee),
-                success: successFunc(),
-                error: errorFunc()
-            });
-
-            function successFunc(response) {
-                console.log(response);
-                alert(response);
-                model.showPersonal2 = false;
-                model.showPersonal3 = true;
-            }
-
-            function errorFunc(error) {
-                //alert("Error occured");//To avoid alerting if no internet connection.
-                console.log(error);
-            }
+            return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
+                   .then(function (response) {
+                       model.employeeId = response.data
+                       console.log(model.employeeId);
+                       return response.data
+                   });
         };
 
     }

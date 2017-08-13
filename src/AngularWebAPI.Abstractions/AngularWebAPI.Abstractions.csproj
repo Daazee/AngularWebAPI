@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IEmployeeDependantRepository.cs" />
+    <Compile Include="Interface\IEmployeeImageRepository.cs" />
     <Compile Include="Interface\IEmployeeRepository.cs" />
     <Compile Include="Interface\IRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

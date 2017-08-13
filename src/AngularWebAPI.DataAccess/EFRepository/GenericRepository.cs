@@ -19,6 +19,11 @@ namespace AngularWebAPI.DataAccess.EFRepository
             return model;
         }        
 
+        public IEnumerable<TEntity> GetEmployeeWithDependant()
+        {
+            var result = _db.Set<TEntity>().ToList();
+            return result;
+        }
         // gets list of items async
         public async Task<IEnumerable<TEntity>> GetItemsAsync()
         {

@@ -1,11 +1,11 @@
 ﻿using AngularWebAPI.Abstractions.Interface;
 using AngularWebAPI.Domain.Entities;
 using System;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Linq;
+using AngularWebAPI.WEBAPI.Models;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
@@ -48,6 +48,42 @@ namespace AngularWebAPI.WEBAPI.Controllers
             return NotFound();
         }
 
+        [Route("EmployeeWithDependant/{id}")]
+        public IHttpActionResult GETEmployee(int id)
+        {
+            try
+            {
+                
+                var employee = Employees.GetEmployeeWithDependant()
+                                        .Select(f => new EmployeeModel()
+                                        {
+                                            Firstname = f.Firstname,
+                                            Lastname = f.Lastname,
+                                            Gender = f.Gender,
+                                            Position = f.Position,
+                                            EmployeeID = f.EmployeeID,
+                                            DateOfBirth = f.DateOfBirth,
+                                            Dependants = f.Dependants.Select(d => new DependantModel()
+                                            {
+                                                EmployeeID = d.EmployeeID,
+                                                ID = d.ID,
+                                                Firstname = d.Firstname,
+                                                Lastname = d.Lastname,
+                                                Gender = d.Gender,
+                                                Relationship = d.Relationship
+                                            })
+                                        });
+                if (employee != null)
+                    return Ok(employee);
+            }
+            catch (Exception)
+            {
+                //throw;
+                return BadRequest();
+            }
+            return NotFound();
+        }
+
         [HttpPost]
         [Route("AddEmployee")]
         public async Task<IHttpActionResult> POST(Employee Employee)
@@ -76,22 +112,14 @@ namespace AngularWebAPI.WEBAPI.Controllers
 
         [HttpPut]
         [Route("UpdateEmployee/{id}")]
-        public async Task<IHttpActionResult> PUT(int id, [FromBody]Employee employee)
+        public async Task<IHttpActionResult> PUT(int id, Employee employee)
         {
             try
             {
                 var query = await Employees.GetItemAsync(id);
-                if (query != null)
+                if (query != null && ModelState.IsValid)
                 {
-                    //query = new Employee
-                    //{
-                    //    Firstname = employee.Firstname,
-                    //    Lastname = employee.Lastname,
-                    //    Gender = employee.Gender,
-                    //    DateOfBirth = employee.DateOfBirth,
-                    //    EmployeeID = employee.EmployeeID,
-                    //    Position = employee.Position
-                    //};
+                    employee.EmployeeID = id;     
                     await Employees.UpdateItemAsync(employee);
                     return Ok();
                 }
@@ -107,7 +135,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
             }          
         }
 
-        [Route("DeleteEmployee")]
+        [HttpDelete]
+        [Route("DeleteEmployee/{id}")]
         public async Task<IHttpActionResult> DELETE(int id)
         {
             try
@@ -128,9 +157,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        
+        }      
 
     }
 }

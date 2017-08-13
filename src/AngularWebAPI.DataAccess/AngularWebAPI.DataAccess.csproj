@@ -50,11 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\AngularWebAPIDataContext.cs" />
+    <Compile Include="EFRepository\EmployeeDependantRepository.cs" />
+    <Compile Include="EFRepository\EmployeeImageRepository.cs" />
     <Compile Include="EFRepository\EmployeeRepository.cs" />
     <Compile Include="EFRepository\GenericRepository.cs" />
     <Compile Include="Migrations\201708081718336_freshTables.cs" />
     <Compile Include="Migrations\201708081718336_freshTables.Designer.cs">
       <DependentUpon>201708081718336_freshTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708121512113_employeeImageTable.cs" />
+    <Compile Include="Migrations\201708121512113_employeeImageTable.Designer.cs">
+      <DependentUpon>201708121512113_employeeImageTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708081718336_freshTables.resx">
       <DependentUpon>201708081718336_freshTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708121512113_employeeImageTable.resx">
+      <DependentUpon>201708121512113_employeeImageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
