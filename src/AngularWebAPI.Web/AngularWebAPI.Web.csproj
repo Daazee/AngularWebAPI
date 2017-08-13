@@ -101,6 +101,9 @@
     <Content Include="app\Common\MainRoute.js" />
     <Content Include="app\Common\module.js" />
     <Content Include="app\Dependant\AddDependant\AddDependant.js" />
+    <Content Include="app\Employee\EmployeeDetail\EmployeeDetail.js" />
+    <Content Include="app\Employee\EmployeeDetail\EmployeeDetails.html" />
+    <Content Include="Content\lampSqure.jpg" />
     <Content Include="Scripts\script.js" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.html" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.js" />
