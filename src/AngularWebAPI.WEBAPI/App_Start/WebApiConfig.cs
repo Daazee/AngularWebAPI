@@ -19,7 +19,7 @@ namespace AngularWebAPI.WEBAPI
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             //var cors = new EnableCorsAttribute("http://localhost:6285", "*", "*");
-            var cors = new EnableCorsAttribute("http://employeesystemapi.azurewebsites.net/", "*", "*");
+            var cors = new EnableCorsAttribute("http://employeesystem.azurewebsites.net/", "*", "*");
             config.EnableCors(cors);
             // Web API routes
             config.MapHttpAttributeRoutes();
