@@ -144,8 +144,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 }
             }
             catch (Exception)
-            {
-                // throw new HttpRequestException();
+            {             
                 return BadRequest();
             }
         }
@@ -161,8 +160,12 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 var query = await Employees.GetItemAsync(id);
                 if (query != null && ModelState.IsValid)
                 {
-                    employee.EmployeeID = id;
-                    await Employees.UpdateItemAsync(employee);
+                    query.Firstname = employee.Firstname;
+                    query.Lastname = employee.Lastname;
+                    query.DateOfBirth = employee.DateOfBirth;
+                    query.Gender = employee.Gender;
+                    query.Position = employee.Position;
+                    await Employees.UpdateItemAsync(query);
                     return Ok();
                 }
                 else
@@ -183,17 +186,9 @@ namespace AngularWebAPI.WEBAPI.Controllers
         {
             try
             {
-                //var query = await Employees.GetItemAsync(id);
-                //if(query != null)
-                //{
+              
                 await Employees.RemoveItemAsync(id);
                 return Ok();
-
-            //    }
-            //    else
-            //    {
-            //        return NotFound();
-            //    }
             }
             catch (Exception ex)
             {
