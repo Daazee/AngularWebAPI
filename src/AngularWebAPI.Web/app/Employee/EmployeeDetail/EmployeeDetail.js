@@ -1,7 +1,8 @@
 ﻿(function () {
     "use strict"
     var module = angular.module("employeeManagement");
-    var baseUrl = "http://localhost:18558/";
+    //var baseUrl = "http://localhost:18558/";
+    var baseUrl = "http://employeesystemapi.azurewebsites.net/";
 
     function fetchEmployee($http, id) {
         return $http.get(`${baseUrl}api/Employee/${id}`)

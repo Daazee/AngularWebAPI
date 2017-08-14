@@ -100,7 +100,6 @@
     <Content Include="app\Common\MainRoute.html" />
     <Content Include="app\Common\MainRoute.js" />
     <Content Include="app\Common\module.js" />
-    <Content Include="app\Dependant\AddDependant\AddDependant.js" />
     <Content Include="app\Employee\EmployeeDetail\EmployeeDetail.js" />
     <Content Include="app\Employee\EmployeeDetail\EmployeeDetails.html" />
     <Content Include="Content\lampSqure.jpg" />
@@ -861,8 +860,6 @@
     <Content Include="Scripts\script.js" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.html" />
     <Content Include="app\Employee\AddEmployee\AddEmployee.js" />
-    <Content Include="app\Employee\EditEmployee\EditEmployee.html" />
-    <Content Include="app\Employee\EditEmployee\EditEmployee.js" />
     <Content Include="app\Employee\ListEmployee\EmployeeList.html" />
     <Content Include="app\Employee\ListEmployee\EmployeeList.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -934,6 +931,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\Dependant\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
