@@ -1,24 +1,21 @@
 ﻿(function () {
     "use strict"
     var module = angular.module("employeeManagement");
-    //var baseUrl = "http://localhost:18558/";
-    var baseUrl = "http://employeesystemapi.azurewebsites.net/";
-    function fetchEmployees($http) {
-        return $http.get(`${baseUrl}api/Employee`)
-        .then(function (response) {
-            return response.data
-        });
-    }
 
-    function controller($http) {
+    function controller($http, baseUrl) {
         var model = this;
         model.employees = [];
         model.employee = [];
 
+        function fetchEmployees() {
+            return $http.get(`${baseUrl}api/Employee`)
+            .then(function (response) {
+                return response.data
+            });
+        }
+
         model.$onInit = function () {
-            fetchEmployees($http).then(function (employees) {
-                console.log("My employeed")
-                console.log(employees)
+            fetchEmployees().then(function (employees) {
                 model.employees = employees;
             });
         };
@@ -34,7 +31,7 @@
             }
         }
 
-        function fetchEmployee($http, id) {
+        function fetchEmployee(id) {
             return $http.get(`${baseUrl}api/Employee/${id}`)
             .then(function (response) {
                 return response.data
@@ -42,7 +39,7 @@
         }
 
         model.getEmployee = function (id) {
-            fetchEmployee($http, id).then(function (employee) {
+            fetchEmployee(id).then(function (employee) {
                 model.employee = employee;
             });
         }
@@ -69,7 +66,7 @@
     module.component("employeeList", {
         templateUrl: "app/Employee/ListEmployee/EmployeeList.html",
         controllerAs: "model",
-        controller: ["$http", controller]
+        controller: ["$http", "baseUrl", controller]
     });
 
 }())

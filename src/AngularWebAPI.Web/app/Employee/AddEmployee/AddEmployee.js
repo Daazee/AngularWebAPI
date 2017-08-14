@@ -1,9 +1,8 @@
 ﻿(function () {
     "use strict"
     var module = angular.module("employeeManagement");
-    //var baseUrl = "http://localhost:18558/";
-    var baseUrl = "http://employeesystemapi.azurewebsites.net/";
-    function controller($http, Upload) {
+
+    function controller($http, baseUrl) {
         var model = this;
         model.employee = [];
         model.dependants = [];
@@ -81,7 +80,7 @@
                        console.log("Added Dependants");
                        console.log(response.data);
                        model.employeeId = response.data.employeeID
-                       fetchDependantsByEmployeeID($http, model.employeeId).then(function (dependants) {
+                       fetchDependantsByEmployeeID(model.employeeId).then(function (dependants) {
                            console.log("My dependants")
                            console.log(dependants)
                            model.dependants = dependants;
@@ -91,7 +90,7 @@
 
 
 
-        function fetchDependantsByEmployeeID($http, id) {
+        function fetchDependantsByEmployeeID(id) {
             return $http.get(`${baseUrl}/api/EmployeeDependant/GetDependantsByEmployeeID/${id}`)
             .then(function (response) {
                 return response.data
@@ -103,7 +102,6 @@
     module.component("createEmployee", {
         templateUrl: "app/Employee/AddEmployee/AddEmployee.html",
         controllerAs: "model",
-        controller: ["$http", controller]
+        controller: ["$http", "baseUrl", controller]
     });
-
 }())
