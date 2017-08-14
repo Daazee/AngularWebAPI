@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
+using System.Web.Http.Cors;
 
 namespace AngularWebAPI.WEBAPI
 {
@@ -17,7 +18,9 @@ namespace AngularWebAPI.WEBAPI
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            config.EnableCors();
+            //var cors = new EnableCorsAttribute("http://localhost:6285", "*", "*");
+            var cors = new EnableCorsAttribute("http://employeesystemapi.azurewebsites.net/", "*", "*");
+            config.EnableCors(cors);
             // Web API routes
             config.MapHttpAttributeRoutes();
 
