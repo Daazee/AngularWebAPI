@@ -9,8 +9,6 @@ using AngularWebAPI.WEBAPI.Models;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {
-
-    [EnableCorsAttribute("http://localhost:6285", "*", "*")]
     [RoutePrefix("api/Employee")]
     public class EmployeeController : ApiController
     {
