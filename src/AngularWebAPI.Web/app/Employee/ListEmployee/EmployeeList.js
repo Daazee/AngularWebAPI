@@ -6,7 +6,6 @@
         var model = this;
         model.employees = [];
         model.employee = [];
-
         function fetchEmployees() {
             return $http.get(`${baseUrl}api/Employee`)
             .then(function (response) {
@@ -25,8 +24,11 @@
             if (confirm("Are you sure you want to delete this employee?")) {
                 return $http.delete(`${baseUrl}api/Employee/DeleteEmployee/${id}`)
                             .then(function (response) {
-                                location.reload()
-                                //return response.data
+
+                                //Fetch updated employee list
+                                fetchEmployees().then(function (employees) {
+                                    model.employees = employees;
+                                });
                             });
             }
         }
@@ -57,9 +59,16 @@
                      .then(function (response) {
                          model.employeeId = response.data
                          console.log(model.employeeId);
+                         angular.element('#discountModal').modal('hide');
+
+                         //Fetch updated employee list
+                         fetchEmployees().then(function (employees) {
+                             model.employees = employees;
+                         });
+
                          return response.data
-                         location.reload()
                      });
+   
         }
     }
 

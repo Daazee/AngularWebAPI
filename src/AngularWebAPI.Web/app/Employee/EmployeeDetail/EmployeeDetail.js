@@ -28,7 +28,7 @@
                 });
             }
 
-            fetchEmployee($http, model.id).then(function (employee) {
+            fetchEmployee(model.id).then(function (employee) {
                 console.log(employee)
                 model.employee = employee;
             });
