@@ -13,6 +13,8 @@
     function controller($http) {
         var model = this;
         model.employees = [];
+        model.employee = [];
+
         model.$onInit = function () {
             fetchEmployees($http).then(function (employees) {
                 console.log("My employeed")
@@ -30,6 +32,37 @@
                                 //return response.data
                             });
             }
+        }
+
+        function fetchEmployee($http, id) {
+            return $http.get(`${baseUrl}api/Employee/${id}`)
+            .then(function (response) {
+                return response.data
+            });
+        }
+
+        model.getEmployee = function (id) {
+            fetchEmployee($http, id).then(function (employee) {
+                model.employee = employee;
+            });
+        }
+
+        model.updateEmployee = function (id) {
+            console.log(id)
+            var Employee = {};
+            Employee.EmployeeID = model.employee.employeeID;
+            Employee.Lastname = model.employee.lastname;
+            Employee.Firstname = model.employee.firstname;
+            Employee.Gender = model.employee.gender;
+            Employee.Position = model.employee.position;
+
+            return $http.put(`${baseUrl}api/Employee/UpdateEmployee/${model.employee.employeeID}`, JSON.stringify(Employee))
+                     .then(function (response) {
+                         model.employeeId = response.data
+                         console.log(model.employeeId);
+                         return response.data
+                         location.reload()
+                     });
         }
     }
 

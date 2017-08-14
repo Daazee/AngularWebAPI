@@ -160,7 +160,6 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 {
                     query.Firstname = employee.Firstname;
                     query.Lastname = employee.Lastname;
-                    query.DateOfBirth = employee.DateOfBirth;
                     query.Gender = employee.Gender;
                     query.Position = employee.Position;
                     await Employees.UpdateItemAsync(query);

@@ -1,18 +1,50 @@
 ﻿
 
 <div class="container">
-    <div class="stepwizard">
+    <div class="stepwizard" ng-hide="model.showPersonal1">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step">
-                <a href="" type="button" class="btn btn-primary btn-circle class1" id="NavigationCustomerDetail">1</a>
+                <a href="" type="button" class="btn btn-primary btn-circle class1">1</a>
                 <p>Add Employee</p>
             </div>
             <div class="stepwizard-step">
-                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled" id="NavigationGarmentEntry">2</a>
+                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled">2</a>
                 <p>Upload Picture</p>
             </div>
             <div class="stepwizard-step">
-                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled" id="NavigationPaymentDetail">3</a>
+                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled">3</a>
+                <p>Dependant</p>
+            </div>
+        </div>
+    </div>
+    <div class="stepwizard" ng-show="model.showPersonal2">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class1" disabled="disabled">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class2">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled">3</a>
+                <p>Dependant</p>
+            </div>
+        </div>
+    </div>
+    <div class="stepwizard" ng-show="model.showPersonal3">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class1" disabled="disabled">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class3">3</a>
                 <p>Dependant</p>
             </div>
         </div>
@@ -35,7 +67,7 @@
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select ng-model="model.gender" class="form-control">
-                    <option selected="selected" value="select">Select</option>
+                    <option selected value="select">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
@@ -43,7 +75,7 @@
             <div class="form-group">
                 <label for="position">Position</label>
                 <select ng-model="model.position" class="form-control">
-                    <option selected="selected" value="select">Select</option>
+                    <option selected value="select">Select</option>
                     <option value="Manager">Manager</option>
                     <option value="Developer">Developer</option>
                     <option value="ProjectManager">Project Manager</option>
@@ -55,7 +87,8 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal2">
-            <input ng-model='file' type="file" />
+            <!--<input ng-model='file' type="file" />-->
+            <div class="button" ngf-select="upload($file)">Upload on file select</div>
             <input type="submit" ng-click="model.uploadPicture()" value="Next" class="btn btn-primary pull-right" />
         </div>
         <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal3">
