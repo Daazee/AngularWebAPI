@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace AngularWebAPI.DataAccess.EFRepository
 {
-    public class EmployeeImageRepository: GenericRepository<EmployeeImage>, IEmployeeImageRepository
+    public class EmployeeImageRepository : GenericRepository<EmployeeImage>, IEmployeeImageRepository
     {
+        public int PostUserImage(int EmployeeID)
+        {
+            return 1;
+        }
     }
 }

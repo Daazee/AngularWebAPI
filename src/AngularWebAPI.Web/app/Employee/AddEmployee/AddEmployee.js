@@ -3,7 +3,7 @@
     var module = angular.module("employeeManagement");
     var baseUrl = "http://localhost:18558/";
 
-    function controller($http) {
+    function controller($http, Upload) {
         var model = this;
         model.employee = [];
         model.dependants = [];
@@ -31,24 +31,46 @@
         }
 
         model.uploadPicture = function () {
-            var Dependant = {};
-
-            //return $http.post(`${baseUrl}api/EmployeeDependant/AddDependant`, JSON.stringify(Dependant))
-            //       .then(function (response) {
-            //           model.employeeId = response.data
-            //           console.log(model.employeeId);
-            //           return response.data
-            //       });
+            var id = 1;
+           // //return $http.post(`${baseUrl}api/EmployeeImage/UploadImage/${id}`, model.file)
+           // //       .then(function (response) {
+           // //           console.log(response.data);
+           // //           return response.data
+           // //       });
+           //$http.post({
+           //    url: '${baseUrl}api/EmployeeImage/UploadImage',
+           //    //data: { EmployeeID: id },
+           //     file: model.file, // or list of files ($files) for html5 only
+           // }).progress(function (evt) {
+           //     //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+           // }).success(function (data, status, headers, config) {
+           //     alert('Uploaded successfully ' + file.name);
+           // }).error(function (err) {
+           //     alert('Error occured during upload');
+           // });
             model.showPersonal2 = false;
             model.showPersonal3 = true;
+        };
+
+        // upload on file select or drop
+        model.upload = function (file) {
+            Upload.upload({
+                url: 'upload/url',
+                data: { file: file, 'username': $scope.username }
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
         };
 
 
         model.addDependant = function () {
             var Dependant = {};
-            alert(model.dependantLastname);
             Dependant.EmployeeId = model.employeeId;
-            alert(Dependant.EmployeeId);
             Dependant.Lastname = model.dependantLastname;
             Dependant.Firstname = model.dependantFirstname;
             Dependant.Gender = model.dependantGender;
