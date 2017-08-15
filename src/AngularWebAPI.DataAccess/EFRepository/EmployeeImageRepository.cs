@@ -10,9 +10,11 @@ namespace AngularWebAPI.DataAccess.EFRepository
 {
     public class EmployeeImageRepository : GenericRepository<EmployeeImage>, IEmployeeImageRepository
     {
-        public int PostUserImage(int EmployeeID)
+        public EmployeeImage GetImageByEmployeeID(int EmployeeID)
         {
-            return 1;
+            var result = _db.EmployeeImage.Where(c => c.EmployeeId == EmployeeID).FirstOrDefault();
+            return result;
         }
+        
     }
 }

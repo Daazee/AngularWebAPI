@@ -32,27 +32,6 @@
         model.uploadPicture = function () {
             var id = 1;
             var EmployeeImage = {};
-           
-
-            //var f = document.getElementById('file').files[0],
-            //    r = new FileReader();
-
-            //r.onloadend = function (e) {
-            //    var data = e.target.result;
-
-            //    EmployeeImage.EmployeeId = 1;
-            //    EmployeeImage.Image = data;
-            //    console.log(data);
-            //    return $http.post(`${baseUrl}api/EmployeeImage/UploadImage`, JSON.stringify(EmployeeImage))
-            //      .then(function (response) {
-            //          console.log(response.data);
-            //          return response.data;
-            //      });
-
-
-
-            //}
-            //r.readAsBinaryString(f);
 
             var file = document.getElementById("imageFile").files[0];
             var r = new FileReader();
@@ -61,7 +40,7 @@
 
                 var arr = Array.from(new Uint8Array(e.target.result));
 
-                    EmployeeImage.EmployeeId = 1;
+                EmployeeImage.EmployeeId = model.employeeId;;
                     EmployeeImage.Image = arr;
 
                 $http.post(`${baseUrl}api/EmployeeImage/UploadImage`, EmployeeImage)
@@ -76,18 +55,6 @@
                 })
             }
             r.readAsArrayBuffer(file);
-           
-           //$http.post({
-           //    url: '${baseUrl}api/EmployeeImage/UploadImage',
-           //    //data: { EmployeeID: id },
-           //     file: model.file, // or list of files ($files) for html5 only
-           // }).progress(function (evt) {
-           //     //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-           // }).success(function (data, status, headers, config) {
-           //     alert('Uploaded successfully ' + file.name);
-           // }).error(function (err) {
-           //     alert('Error occured during upload');
-           // });
             model.showPersonal2 = false;
             model.showPersonal3 = true;
         };

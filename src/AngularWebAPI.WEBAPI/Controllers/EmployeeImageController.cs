@@ -20,9 +20,9 @@ namespace AngularWebAPI.WEBAPI.Controllers
         }
 
         [Route("{id}")]        
-        public async Task<IHttpActionResult> GET(int employeeId)
+        public async Task<IHttpActionResult> GET(int id)
         {
-            var query = EmployeeImage.GetItemAsync(employeeId);
+            var query = await EmployeeImage.GetItemAsync(id);
             if (query != null)
             {
                 return Ok(query);
@@ -76,69 +76,15 @@ namespace AngularWebAPI.WEBAPI.Controllers
             }
         }
 
-        [Route("UploadImage")]
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IHttpActionResult> PostUserImage()
+        [Route("GETImageByEmployeeID/{id}")]
+        public async Task<IHttpActionResult> GETImageByEmployeeID(int id)
         {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            try
-            {
-
-                var httpRequest = HttpContext.Current.Request;
-
-                foreach (string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    if (postedFile != null && postedFile.ContentLength > 0)
-                    {
-
-                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
-
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
-                        var extension = ext.ToLower();
-                        if (!AllowedFileExtensions.Contains(extension))
-                        {
-
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
-
-                            dict.Add("error", message);
-                            return BadRequest();
-                        }
-                        else if (postedFile.ContentLength > MaxContentLength)
-                        {
-
-                            var message = string.Format("Please Upload a file upto 1 mb.");
-
-                            dict.Add("error", message);
-                            return BadRequest();
-                        }
-                        else
-                        {
-
-
-
-                            var filePath = HttpContext.Current.Server.MapPath("~/Userimage/" + postedFile.FileName + extension);
-
-                            postedFile.SaveAs(filePath);
-
-                        }
-                    }
-
-                    var message1 = string.Format("Image Updated Successfully.");
-                    return Ok(message1); ;
-                }
-                var res = string.Format("Please Upload a image.");
-                dict.Add("error", res);
-                return NotFound();
-            }
-            catch (Exception ex)
-            {
-                var res = string.Format("some Message");
-                dict.Add("error", res);
-                return NotFound();
-            }
+            var image = EmployeeImage.GetImageByEmployeeID(id);
+            var result = Convert.ToBase64String(image.Image);
+            if (image != null)
+                return Ok(result);
+            else
+                return BadRequest();
         }
     }
 }

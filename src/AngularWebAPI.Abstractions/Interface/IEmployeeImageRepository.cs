@@ -9,6 +9,6 @@ namespace AngularWebAPI.Abstractions.Interface
 {
     public interface IEmployeeImageRepository: IRepositoryBase<EmployeeImage>
     {
-      int  PostUserImage(int EmployeeID);
+        EmployeeImage GetImageByEmployeeID(int EmployeeID);
     }
 }

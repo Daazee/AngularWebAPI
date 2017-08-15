@@ -2,7 +2,7 @@
     "use strict"
     var module = angular.module("employeeManagement");
 
-   
+
 
     function controller($http, baseUrl) {
 
@@ -28,6 +28,13 @@
                 });
             }
 
+            function fetchEmployeeImage(id) {
+                return $http.get(`${baseUrl}api/EmployeeImage/GETImageByEmployeeID/${id}`)
+                    .then(function (response) {
+        console.log("employee image")
+        return response.data
+    });
+            }
             fetchEmployee(model.id).then(function (employee) {
                 console.log(employee)
                 model.employee = employee;
@@ -38,7 +45,15 @@
                 console.log(dependants)
                 model.dependants = dependants;
             });
+
+            fetchEmployeeImage(model.id).then(function (image) {
+                console.log("My Image")
+                console.log(image)
+                model.image = image;
+            });
+
         }
+
     }
 
 
