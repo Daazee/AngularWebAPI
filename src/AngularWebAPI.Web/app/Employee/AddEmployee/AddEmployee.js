@@ -2,7 +2,7 @@
     "use strict"
     var module = angular.module("employeeManagement");
 
-    function controller($http, baseUrl) {
+    function controller($http, baseUrl, Upload, $timeout) {
         var model = this;
         model.employee = [];
         model.dependants = [];
@@ -31,11 +31,52 @@
 
         model.uploadPicture = function () {
             var id = 1;
-           // //return $http.post(`${baseUrl}api/EmployeeImage/UploadImage/${id}`, model.file)
-           // //       .then(function (response) {
-           // //           console.log(response.data);
-           // //           return response.data
-           // //       });
+            var EmployeeImage = {};
+           
+
+            //var f = document.getElementById('file').files[0],
+            //    r = new FileReader();
+
+            //r.onloadend = function (e) {
+            //    var data = e.target.result;
+
+            //    EmployeeImage.EmployeeId = 1;
+            //    EmployeeImage.Image = data;
+            //    console.log(data);
+            //    return $http.post(`${baseUrl}api/EmployeeImage/UploadImage`, JSON.stringify(EmployeeImage))
+            //      .then(function (response) {
+            //          console.log(response.data);
+            //          return response.data;
+            //      });
+
+
+
+            //}
+            //r.readAsBinaryString(f);
+
+            var file = document.getElementById("imageFile").files[0];
+            var r = new FileReader();
+            r.onloadend = function (e) {
+
+
+                var arr = Array.from(new Uint8Array(e.target.result));
+
+                    EmployeeImage.EmployeeId = 1;
+                    EmployeeImage.Image = arr;
+
+                $http.post(`${baseUrl}api/EmployeeImage/UploadImage`, EmployeeImage)
+                .then(
+                function (response) {
+                    console.log(response);
+                },
+
+                function (reason) {
+
+                    console.log(reason);
+                })
+            }
+            r.readAsArrayBuffer(file);
+           
            //$http.post({
            //    url: '${baseUrl}api/EmployeeImage/UploadImage',
            //    //data: { EmployeeID: id },
@@ -97,11 +138,35 @@
             });
         }
 
+        // module.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+        model.uploadPic = function (file) {
+            alert('uploading')
+            file.upload = Upload.upload({
+                url: `${baseUrl}api/EmployeeImage/UploadImage`,
+                data: { EmployeeID: 1, file: file },
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    //$scope.errorMsg = response.status + ': ' + response.data;
+                    console.log();
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            });
+        }
+        //}]);
+
     }
 
+   
     module.component("createEmployee", {
         templateUrl: "app/Employee/AddEmployee/AddEmployee.html",
         controllerAs: "model",
-        controller: ["$http", "baseUrl", controller]
+        controller: ["$http", "baseUrl", "Upload", "$timeout", controller]
     });
 }())
