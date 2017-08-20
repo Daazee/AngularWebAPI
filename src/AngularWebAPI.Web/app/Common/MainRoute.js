@@ -7,6 +7,7 @@
         $routeConfig: [
             { path: "/EmployeeList", component: "employeeList", name: "EmployeeList" },
             { path: "/AddEmployee", component: "createEmployee", name: "AddEmployee" },
+            { path: "/login", component: "login", name: "Login" },
             { path: "/EmployeeDetail/:id", component: "employeeDetail", name: "EmployeeDetail" },
             {path: "/EditEmployee/:id", component: "editEmployee", name: "EditEmployee"},
             { path: "/**", redirectTo: ["EmployeeList"] },
