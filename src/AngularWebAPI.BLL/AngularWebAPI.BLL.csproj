@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{24A3BB86-5B21-4F7F-AD02-F5FA17ED97A0}</ProjectGuid>
+    <ProjectGuid>{B16C2F73-6083-41C1-B34F-75A6A13F551D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AngularWebAPI.Mock</RootNamespace>
-    <AssemblyName>AngularWebAPI.Mock</AssemblyName>
+    <RootNamespace>AngularWebAPI.BLL</RootNamespace>
+    <AssemblyName>AngularWebAPI.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,15 +29,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-Mock|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug-Mock\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,21 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFRepository\EmployeeDependantRepository.cs" />
-    <Compile Include="EFRepository\EmployeeImageRepository.cs" />
-    <Compile Include="EFRepository\EmployeeRepository.cs" />
-    <Compile Include="EFRepository\GenericRepository.cs" />
+    <Compile Include="EmployeeBs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AngularWebAPI.Abstractions\AngularWebAPI.Abstractions.csproj">
-      <Project>{ea670958-e645-4589-8377-6fe736827475}</Project>
-      <Name>AngularWebAPI.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AngularWebAPI.Domain\AngularWebAPI.Domain.csproj">
-      <Project>{e083e299-df45-40fd-a240-75857cd90712}</Project>
-      <Name>AngularWebAPI.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
