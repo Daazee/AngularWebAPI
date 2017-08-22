@@ -15,7 +15,7 @@ namespace AngularWebAPI.WEBAPI.App_Start
     using Abstractions.Interface;
     using System.Web.Http;
     using WebApiContrib.IoC.Ninject;
-    using DataAccess.EFRepository;
+    using Abstractions.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -68,10 +68,20 @@ namespace AngularWebAPI.WEBAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DbContext>().To<AngularWebAPIDataContext>();
-            kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
-            kernel.Bind<IEmployeeDependantRepository>().To<EmployeeDependantRepository>();
-            kernel.Bind<IEmployeeImageRepository>().To<EmployeeImageRepository>();
+            if (EnvironmentConfiguration.Instance.UsesMockData)
+            {
+                kernel.Bind<IEmployeeRepository>().To<AngularWebAPI.Mock.EFRepository.EmployeeRepository>();
+
+            }
+            else
+            {
+                kernel.Bind<DbContext>().To<AngularWebAPI.DataAccess.DataAccess.AngularWebAPIDataContext>();
+                kernel.Bind<IEmployeeRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeRepository>();
+                kernel.Bind<IEmployeeDependantRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeDependantRepository>();
+                kernel.Bind<IEmployeeImageRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeImageRepository>();
+            }
+
+
         }        
     }
 }

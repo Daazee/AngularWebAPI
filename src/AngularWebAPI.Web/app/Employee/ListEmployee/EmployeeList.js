@@ -10,7 +10,10 @@
             return $http.get(`${baseUrl}api/Employee`)
             .then(function (response) {
                 return response.data
-            });
+            },
+             function (reason) {
+                 console.log(reason)
+             });
         }
 
         model.$onInit = function () {
