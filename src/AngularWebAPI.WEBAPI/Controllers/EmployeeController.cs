@@ -63,7 +63,8 @@ namespace AngularWebAPI.WEBAPI.Controllers
                                             Position = f.Position,
                                             EmployeeID = f.EmployeeID,
                                             DateOfBirth = f.DateOfBirth,
-                                            Dependants = f.Dependants.Select(d => new DependantModel()
+                                            Dependants = f.Dependants
+                                            .Select(d => new DependantModel()
                                             {
                                                 EmployeeID = d.EmployeeID,
                                                 ID = d.ID,
