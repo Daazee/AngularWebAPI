@@ -962,7 +962,11 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="SpecRunner.html" />
+    <Content Include="tests\addEmployeeTests.js" />
     <Content Include="tests\CalculatorAppTest.js" />
+    <Content Include="tests\conf.js" />
+    <Content Include="tests\employeeListTests.js" />
+    <Content Include="tests\test-spec.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\version.json" />
     <None Include="Web.Debug.config">
