@@ -1,0 +1,32 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <a href="#" class="">
+            <span class="glyphicon glyphicon-home"></span>  HOME
+          </a>
+        </li>
+        <li>
+          <a routerLink="/AddEmployee" routerLinkActive="active" class="">
+            CREATE EMPLOYEE
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav"></ul>
+    </div>
+  </div>
+</div>
+
+<div class="container body-content" style="margin-top:30px;">
+  <router-outlet></router-outlet>
+</div>

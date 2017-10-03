@@ -1,0 +1,106 @@
+﻿
+
+<div>
+  <!--<a ng-link="['AddEmployee']" class="btn btn bg-primary">
+      Create New Employee
+  </a>-->
+</div>
+<br />
+<div class="panel panel-primary table-responsive">
+  <div class="panel-heading">
+    <h4>Employee List</h4>
+  </div>
+  <div class="row">
+    <input [(ngModel)]="searchText" placeholder="Search Employee" class="form-control col-md-12" style="margin:10px;">
+  </div>
+  <div class="panel-body">
+    <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th>Lastname</th>
+          <th>Firstname</th>
+          <th>Gender</th>
+          <th>Date Of Birth</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.lastname }}</td>
+          <td>{{ employee.firstname }}</td>
+          <td>{{ employee.gender }}</td>
+          <td>{{ employee.dateOfBirth | date:"MM/dd/yyyy" }}</td>
+          <td>{{ employee.position }}</td>
+          <td>
+            <a (click)="onGetEmployee(employee.employeeID)" data-toggle="modal" data-target="#discountModal" class="btn btn-sm btn-primary">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+
+            </a>
+            <a (click)="gotoDetail(employee.employeeID)" class="btn btn-sm btn-success">
+              Detail
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+            <a class="btn btn-danger btn-sm" (click)="onDeleteEmployee(employee.employeeID)">
+              Delete
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+
+    <div id="discountModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Employee</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" ng-hide="true">
+              <label for="id">ID</label>
+              <input type="text" [(ngModel)]="employee.employeeID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input type="text" [(ngModel)]="employee.firstname" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <input type="text" [(ngModel)]="employee.lastname" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select [(ngModel)]="employee.gender" class="form-control">
+                <option selected="selected" value="select">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="position">Position</label>
+              <select [(ngModel)]="employee.position" class="form-control">
+                <option selected="selected" value="select">Select</option>
+                <option value="Manager">Manager</option>
+                <option value="Developer">Developer</option>
+                <option value="ProjectManager">Project Manager</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
+              <input type="submit" (click)="updateEmployee(employee.employeeID)" value="Update Record" class="btn btn-primary pull-right" />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
