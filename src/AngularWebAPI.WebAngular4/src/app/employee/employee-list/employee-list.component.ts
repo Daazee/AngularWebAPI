@@ -13,7 +13,8 @@ export class EmployeeListComponent implements OnInit {
     @ViewChild('discountModal') public modal: ModalDirective;
     public employees: Employee[];
     public employee: Employee;
-    searchText: any = { $or: ['Dayo', 'Chu'] };
+    searchText: any = { firstname: '', lastname: '', position: '' };
+
 
     constructor(private _router: Router, private _employeeService: EmployeeServiceService) {
         this._employeeService.getEmployees().subscribe(data => {
