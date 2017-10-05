@@ -11,13 +11,13 @@ using System.Web.Http.Results;
 namespace AngularWebAPI.UnitTest
 {
 
-    [TestClass]
+    //[TestClass]
     public class TestEmployeeController
     {
 
         Mock<IEmployeeRepository> mock = new Mock<IEmployeeRepository>();
          
-        [TestMethod]   
+        //[TestMethod]   
         public async Task GetEmployee()
         {
             // Arrange            
@@ -38,7 +38,7 @@ namespace AngularWebAPI.UnitTest
         }
 
 
-        [TestMethod]
+        //[TestMethod]
         public async Task PostEmployee_Mock()
         {
             var mockRepo = new Mock<IEmployeeRepository>();
@@ -64,7 +64,7 @@ namespace AngularWebAPI.UnitTest
         }
 
 
-        [TestMethod]
+        //[TestMethod]
         public async Task Delete()
         {
             // Arrange
