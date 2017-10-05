@@ -5,10 +5,11 @@ import { AppComponent } from './app.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeServiceService } from './services/employee-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpinterceptorService } from './service/httpinterceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateEmployeeComponent } from './employee/create-employee/create-employee.component';
-
 import { AppRoutingModule } from './app-routing.module';
+import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     ContainerComponent,
     EmployeeListComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    EmployeeDetailComponent
   ],
   imports: [
       BrowserModule,
@@ -24,7 +26,11 @@ import { AppRoutingModule } from './app-routing.module';
       AppRoutingModule,
       FormsModule,
   ],
-  providers: [EmployeeServiceService],
+providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpinterceptorService,
+    multi: true,
+}, EmployeeServiceService],
   bootstrap: [AppComponent]
 })
 

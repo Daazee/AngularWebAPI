@@ -2,12 +2,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { Employee } from "../app.component";
+import { Employee, Dependant } from "../app.component";
 
 @Injectable()
 export class EmployeeServiceService {
      response: any;
-	 public baseUrl: any = 'http://localhost/AngularWebAPI.WEBAPI/';
+     public baseUrl: any = 'http://localhost:18558/';
     constructor(private http: HttpClient) { }
     getEmployee(id: any): Observable<Employee>  {
 
@@ -24,6 +24,21 @@ export class EmployeeServiceService {
             return data;
             
         });  
+    }
+
+    getEmployeeDependants(id: any): Observable<Dependant[]> {
+        return this.http.get(this.baseUrl + '/api/EmployeeDependant/GetDependantsByEmployeeID/'+id)
+            .map(response => {
+                return response;
+            });
+    }
+
+    getEmployeeImage(id: any): Observable<any> {
+        return this.http.get(this.baseUrl+'/api/EmployeeImage/GETImageByEmployeeID/'+id)
+            .map(response => {
+                console.log("employee image")
+                return response;
+            });
     }
 
     UpdateEmployee(id: any, body: any): Observable<Employee>{

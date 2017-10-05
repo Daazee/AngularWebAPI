@@ -25,3 +25,8 @@ export class Dependant {
     public id: string;
     public gender: string;
 }
+export class EmployeeImage {
+    public employeeID: string;
+    public ID: string;
+    public Image: any;
+}
