@@ -55,9 +55,9 @@ export class EmployeeServiceService {
         });
     }
 
-    AddEmployee(id: any, body: any) {
+    AddEmployee(body:any): Observable<any> {
 
-        this.http.post(this.baseUrl + 'api/Employee/AddEmployee/' + id, body).subscribe(response => {
+       return this.http.post(this.baseUrl + 'api/Employee/AddEmployee/', body).map(response => {
             return response;
         });
     }
