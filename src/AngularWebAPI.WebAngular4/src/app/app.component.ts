@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'app';
 }
 export class Employee {
-    public employeeID: string;
+    public employeeID: number;
     public firstname: string;
     public lastname: string;
     public dateOfBirth: string;

@@ -1,3 +1,151 @@
-<p>
-  create-employee works!
-</p>
+
+<div class="container">
+    <div class="stepwizard" *ngIf="showPersonal1">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class1">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled">3</a>
+                <p>Dependant</p>
+            </div>
+        </div>
+    </div>
+    <div class="stepwizard" *ngIf="showPersonal2">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class1" disabled="disabled">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class2">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class3" disabled="disabled">3</a>
+                <p>Dependant</p>
+            </div>
+        </div>
+    </div>
+    <div class="stepwizard" *ngIf="showPersonal3">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class1" disabled="disabled">1</a>
+                <p>Add Employee</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-default btn-circle class2" disabled="disabled">2</a>
+                <p>Upload Picture</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="" type="button" class="btn btn-primary btn-circle class3">3</a>
+                <p>Dependant</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2" ng-hide="model.showPersonal1">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" [(ngModel)]="employee.firstname" class="form-control" name="employee.firstname" />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" [(ngModel)]="employee.lastname" class="form-control" name="employee.lastname" />
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date Of Birth</label>
+                <input type="date" [(ngModel)]="employee.dateOfBirth" class="form-control" name="employee.dateOfBirth" />
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select [(ngModel)]="employee.gender" class="form-control" name="employee.gender">
+                    <option selected value="select">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <select [(ngModel)]="employee.position" class="form-control" name="employee.position">
+                    <option selected value="select">Select</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Developer">Developer</option>
+                    <option value="ProjectManager">Project Manager</option>
+                </select>
+            </div>
+
+            <div class="">
+                <input id="showPersonal1Button" type="submit" (click)="addEmployee()" value="Next" class="btn btn-primary pull-right" />
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal2">
+            <input id="imageFile" name="file" type="file" />
+            <input type="submit" id="showPersonal2Button" (click)="uploadPicture()" value="Next" class="btn btn-primary pull-right" />
+        </div>
+        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal3">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" ng-model="dependant.firstname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" ng-model="dependant.lastname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select ng-model="dependant.gender" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Relationship</label>
+                <select ng-model="dependant.relationship" class="form-control">
+                    <option selected="selected" value="select">Select</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Child">Child</option>
+                </select>
+            </div>
+            <div class="">
+                <input type="submit" id="showPersonal3Button" (click)="addDependant()" value="Save" class="btn btn-primary pull-left" />
+                <a href="#" id="showPersonal3FinishButton" class="btn btn-success pull-right">Finish</a>
+            </div>
+            <br />
+            <br />
+            <br />
+
+            <div class="table-responsive">
+                <table class="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Lastname</th>
+                            <th>Firstname</th>
+                            <th>Gender</th>
+                            <th>Relationship</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dependant in model.dependants">
+                            <td>{{dependant.lastname}}</td>
+                            <td>{{dependant.firstname}}</td>
+                            <td>{{dependant.gender}}</td>
+                            <td>{{dependant.relationship}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+
+
+    </div>
+
+</div>
