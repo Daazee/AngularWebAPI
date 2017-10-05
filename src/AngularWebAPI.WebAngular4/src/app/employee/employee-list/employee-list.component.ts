@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { Employee } from "../../app.component";
 
@@ -10,19 +11,21 @@ import { Employee } from "../../app.component";
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-    @ViewChild('discountModal') public modal: ModalDirective;
+
+    public loading = false;
+
     public employees: Employee[];
     public employee: Employee;
     searchText: any = { firstname: '', lastname: '', position: '' };
 
-
-    constructor(private _router: Router, private _employeeService: EmployeeServiceService) {
-        this._employeeService.getEmployees().subscribe(data => {
+    constructor(private _router: Router,
+                private _employeeService: EmployeeServiceService,
+                private ng4LoadingSpinnerService: Ng4LoadingSpinnerService) {
+            this._employeeService.getEmployees().subscribe(data => {
             this.employees = data;
             this.employee = data[0];
             console.log(this.employees);
-        });
-        
+        });        
     }
 
   ngOnInit() {
@@ -33,6 +36,7 @@ export class EmployeeListComponent implements OnInit {
       if (confirm("Are you sure you want to delete this employee?")) {
           this._employeeService.DeleteEmployee(id);
       }
+      location.reload();
   }
 
   gotoDetail(id): void {
@@ -46,13 +50,12 @@ export class EmployeeListComponent implements OnInit {
   }
 
   updateEmployee(id: any) {
+      this.loading = true;
       var body = JSON.stringify(this.employee);
       this._employeeService.UpdateEmployee(id, body).subscribe(data => {
-          this.employee = data;
-          
-         
-      });
-      
-      window.location.reload();
+          this.employee = data;         
+      });      
+      location.reload();
+      this.loading = false;
   }
 }

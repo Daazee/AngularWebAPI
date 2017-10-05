@@ -11,15 +11,19 @@
     <h4>Employee List</h4>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <input [(ngModel)]="searchText.firstname" placeholder="Search Firstname" class="form-control col-md-4" style="margin:10px;">
-
-    </div>
-    <div class="col-md-4">
+    
+    <div class="col-md-3">
       <input [(ngModel)]="searchText.lastname" placeholder="Search Lastname" class="form-control col-md-4" style="margin:10px;">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <input [(ngModel)]="searchText.firstname" placeholder="Search Firstname" class="form-control col-md-4" style="margin:10px;">
+    </div>
+    <div class="col-md-3">
       <input [(ngModel)]="searchText.position" placeholder="Search Position" class="form-control col-md-4" style="margin:10px;">
+    </div>
+    <div class="my-container">
+      <ngx-loading [show]="loading" [config]="{ backdropBackgroundColour: 'rgba(255,255, 0, 0)', backdropBorderRadius: '10px',
+        primaryColour: '#fe1600', secondaryColour: '#00bfff', tertiaryColour: '#fe1600' }"></ngx-loading>
     </div>
   </div>
   <div class="panel-body">
