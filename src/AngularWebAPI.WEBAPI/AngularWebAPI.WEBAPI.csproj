@@ -17,7 +17,7 @@
     <AssemblyName>AngularWebAPI.WEBAPI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -368,7 +368,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18558</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/AngularWebAPI.WEBAPI</IISUrl>
+          <IISUrl>http://localhost:18558/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

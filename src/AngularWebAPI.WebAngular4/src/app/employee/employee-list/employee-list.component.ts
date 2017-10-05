@@ -1,6 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { Employee } from "../../app.component";
 
@@ -10,9 +10,11 @@ import { Employee } from "../../app.component";
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-
+    @ViewChild('discountModal') public modal: ModalDirective;
     public employees: Employee[];
     public employee: Employee;
+    searchText: any = { $or: ['Dayo', 'Chu'] };
+
     constructor(private _router: Router, private _employeeService: EmployeeServiceService) {
         this._employeeService.getEmployees().subscribe(data => {
             this.employees = data;
@@ -46,6 +48,10 @@ export class EmployeeListComponent implements OnInit {
       var body = JSON.stringify(this.employee);
       this._employeeService.UpdateEmployee(id, body).subscribe(data => {
           this.employee = data;
+          
+         
       });
+      
+      window.location.reload();
   }
 }

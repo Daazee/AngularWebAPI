@@ -50,7 +50,7 @@ export class EmployeeServiceService {
 
     DeleteEmployee(id: any) {
 
-        this.http.delete(this.baseUrl + 'api/Employee/UpdateEmployee/' + id).subscribe(response => {
+        this.http.delete(this.baseUrl + 'api/Employee/DeleteEmployee/' + id).subscribe(response => {
             return response;
         });
     }
@@ -68,8 +68,8 @@ export class EmployeeServiceService {
         });
     }
 
-    AddEmployeeDependency(body: any) {
-        this.http.post(this.baseUrl + 'api/EmployeeDependant/AddDependant', body).subscribe(response => {
+    AddEmployeeDependency(body: any): Observable<Dependant> {
+       return this.http.post(this.baseUrl + 'api/EmployeeDependant/AddDependant', body).map(response => {
             return response;
         });
     }

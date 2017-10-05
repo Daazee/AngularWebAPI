@@ -18,15 +18,15 @@ export class Employee {
     public dependants: Dependant[]
 }
 export class Dependant {
-    public employeeID: string;
+    public employeeID: number;
     public firstname: string;
     public lastname: string;
     public relationship: string;
-    public id: string;
+    public id: number;
     public gender: string;
 }
 export class EmployeeImage {
-    public employeeID: string;
-    public ID: string;
+    public employeeID: number;
+    public ID: number;
     public Image: any;
 }

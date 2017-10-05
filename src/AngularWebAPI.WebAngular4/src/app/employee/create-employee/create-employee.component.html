@@ -1,4 +1,4 @@
-
+﻿
 <div class="container">
     <div class="stepwizard" *ngIf="showPersonal1">
         <div class="stepwizard-row setup-panel">
@@ -50,7 +50,7 @@
     </div>
     <div class="row">
 
-        <div class="col-md-8 col-md-offset-2" ng-hide="model.showPersonal1">
+        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal1">
             <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" [(ngModel)]="employee.firstname" class="form-control" name="employee.firstname" />
@@ -92,15 +92,15 @@
         <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal3">
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" ng-model="dependant.firstname" class="form-control" />
+                <input type="text" [(ngModel)]="dependant.firstname" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" ng-model="dependant.lastname" class="form-control" />
+                <input type="text" [(ngModel)]="dependant.lastname" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <select ng-model="dependant.gender" class="form-control">
+                <select [(ngModel)]="dependant.gender" class="form-control">
                     <option selected="selected" value="select">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -108,7 +108,7 @@
             </div>
             <div class="form-group">
                 <label for="position">Relationship</label>
-                <select ng-model="dependant.relationship" class="form-control">
+                <select [(ngModel)]="dependant.relationship" class="form-control">
                     <option selected="selected" value="select">Select</option>
                     <option value="Spouse">Spouse</option>
                     <option value="Child">Child</option>
@@ -133,7 +133,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="dependant in model.dependants">
+                        <tr *ngFor="let dependant of dependants">
                             <td>{{dependant.lastname}}</td>
                             <td>{{dependant.firstname}}</td>
                             <td>{{dependant.gender}}</td>

@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let employee of employees">
+        <tr *ngFor="let employee of employees | filterBy: searchText">
           <td>{{ employee.lastname }}</td>
           <td>{{ employee.firstname }}</td>
           <td>{{ employee.gender }}</td>
