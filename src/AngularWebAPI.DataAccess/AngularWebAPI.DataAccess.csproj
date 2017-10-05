@@ -63,13 +63,9 @@
     <Compile Include="EFRepository\EmployeeImageRepository.cs" />
     <Compile Include="EFRepository\EmployeeRepository.cs" />
     <Compile Include="EFRepository\GenericRepository.cs" />
-    <Compile Include="Migrations\201708081718336_freshTables.cs" />
-    <Compile Include="Migrations\201708081718336_freshTables.Designer.cs">
-      <DependentUpon>201708081718336_freshTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708121512113_employeeImageTable.cs" />
-    <Compile Include="Migrations\201708121512113_employeeImageTable.Designer.cs">
-      <DependentUpon>201708121512113_employeeImageTable.cs</DependentUpon>
+    <Compile Include="Migrations\201709051154153_initialTables.cs" />
+    <Compile Include="Migrations\201709051154153_initialTables.Designer.cs">
+      <DependentUpon>201709051154153_initialTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,14 +73,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708081718336_freshTables.resx">
-      <DependentUpon>201708081718336_freshTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708121512113_employeeImageTable.resx">
-      <DependentUpon>201708121512113_employeeImageTable.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AngularWebAPI.Abstractions\AngularWebAPI.Abstractions.csproj">
@@ -95,6 +83,11 @@
       <Project>{e083e299-df45-40fd-a240-75857cd90712}</Project>
       <Name>AngularWebAPI.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709051154153_initialTables.resx">
+      <DependentUpon>201709051154153_initialTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

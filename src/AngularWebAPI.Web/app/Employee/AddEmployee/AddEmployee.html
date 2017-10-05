@@ -83,14 +83,14 @@
             </div>
 
             <div class="">
-                <input id="showPersonal1Button" type="submit" ng-click="model.addEmployee()" value="Next" class="btn btn-primary pull-right" />
+                <input type="submit" ng-click="model.addEmployee()" value="Next" class="btn btn-primary pull-right" />
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2" ng-show="model.showPersonal2">
             <!--<input ng-model='model.file' type="file" />-->
             <input id="imageFile" name="file" type="file" />
             <!--<div class="button" ngf-select="model.upload($file)">Upload on file select</div>-->
-            <input type="submit" id="showPersonal2Button" ng-click="model.uploadPicture()" value="Next" class="btn btn-primary pull-right" />
+            <input type="submit" ng-click="model.uploadPicture()" value="Next" class="btn btn-primary pull-right" />
             <!--<fieldset>
                 <legend>Upload on form submit</legend>
                 Username:
@@ -146,8 +146,8 @@
                 </select>
             </div>
             <div class="">
-                <input type="submit" id="showPersonal3Button" ng-click="model.addDependant()" value="Save" class="btn btn-primary pull-left" />
-                <a href="#" id="showPersonal3FinishButton" class="btn btn-success pull-right">Finish</a>
+                <input type="submit" ng-click="model.addDependant()" value="Save" class="btn btn-primary pull-left" />
+                <a href="#" class="btn btn-success pull-right">Finish</a>
             </div>
             <br />
             <br />

@@ -71,6 +71,8 @@ namespace AngularWebAPI.WEBAPI.App_Start
             if (EnvironmentConfiguration.Instance.UsesMockData)
             {
                 kernel.Bind<IEmployeeRepository>().To<AngularWebAPI.Mock.EFRepository.EmployeeRepository>();
+                kernel.Bind<IEmployeeDependantRepository>().To<AngularWebAPI.Mock.EFRepository.EmployeeDependantRepository>();
+                kernel.Bind<IEmployeeImageRepository>().To<AngularWebAPI.Mock.EFRepository.EmployeeImageRepository>();
 
             }
             else
