@@ -49,47 +49,60 @@
         </div>
     </div>
     <div class="row">
-
-        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal1">
+      
+        <form class="col-md-8 col-md-offset-2" novalidate *ngIf="showPersonal1" #tab1Form="ngForm" (ngSubmit)="addEmployee(tab1Form.value)">
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" [(ngModel)]="employee.firstname" class="form-control" name="employee.firstname" />
+                <input type="text" class="form-control" name="firstname" ngModel   />
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" [(ngModel)]="employee.lastname" class="form-control" name="employee.lastname" />
+                <input type="text" ngModel class="form-control" name="lastname" />
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date Of Birth</label>
-                <input type="date" [(ngModel)]="employee.dateOfBirth" class="form-control" name="employee.dateOfBirth" />
+                <input type="date" ngModel class="form-control" name="dateOfBirth" />
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <select [(ngModel)]="employee.gender" class="form-control" name="employee.gender">
-                    <option selected value="select">Select</option>
+                <select ngModel class="form-control" name="gender">
+                    <option selected value="">Select gender...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="position">Position</label>
-                <select [(ngModel)]="employee.position" class="form-control" name="employee.position">
-                    <option selected value="select">Select</option>
+                <select ngModel class="form-control" name="position">
+                    <option selected value="">Select position...</option>
                     <option value="Manager">Manager</option>
                     <option value="Developer">Developer</option>
                     <option value="ProjectManager">Project Manager</option>
                 </select>
             </div>
 
+
+          <div *ngIf="isFormInvalid" class="alert alert-danger">
+            <div *ngIf="isFirstnameValid">Firstname is required</div>
+            <div *ngIf="isLastnameValid">Lastname is required</div>
+            <div *ngIf="isDOBInvalid">Date of Birth is required</div>
+            <div *ngIf="isGenderInvalid">Gender is required</div>
+            <div *ngIf="isPositionInvalid">Position is required</div>
+          </div>
+
             <div class="">
-                <input id="showPersonal1Button" type="submit" (click)="addEmployee()" value="Next" class="btn btn-primary pull-right" />
+                <button id="showPersonal1Button" type="submit" class="btn btn-primary pull-right">Proceed to upload picture</button>
             </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal2">
+        </form>
+
+
+
+
+        <form class="col-md-8 col-md-offset-2" *ngIf="showPersonal2">
             <input id="imageFile" name="file" type="file" />
             <input type="submit" id="showPersonal2Button" (click)="uploadPicture()" value="Next" class="btn btn-primary pull-right" />
-        </div>
-        <div class="col-md-8 col-md-offset-2" *ngIf="showPersonal3">
+        </form>
+        <form class="col-md-8 col-md-offset-2" *ngIf="showPersonal3">
             <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" [(ngModel)]="dependant.firstname" class="form-control" />
@@ -142,7 +155,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </form>
         <div class="col-md-2">&nbsp;</div>
 
 

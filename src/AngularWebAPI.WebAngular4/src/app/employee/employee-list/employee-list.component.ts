@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { Employee } from "../../app.component";
@@ -19,8 +18,7 @@ export class EmployeeListComponent implements OnInit {
     searchText: any = { firstname: '', lastname: '', position: '' };
 
     constructor(private _router: Router,
-                private _employeeService: EmployeeServiceService,
-                private ng4LoadingSpinnerService: Ng4LoadingSpinnerService) {
+                private _employeeService: EmployeeServiceService,) {
             this._employeeService.getEmployees().subscribe(data => {
             this.employees = data;
             this.employee = data[0];

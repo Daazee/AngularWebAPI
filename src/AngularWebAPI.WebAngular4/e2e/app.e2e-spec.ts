@@ -1,14 +1,19 @@
-import { AppPage } from './app.po';
+﻿import { AppPage } from './app.po';
 
-describe('angular-web-api.web-angular4 App', () => {
-  let page: AppPage;
+import { EmployeeListPage } from './employee/employee-list.po';
 
-  beforeEach(() => {
-    page = new AppPage();
+describe('Conduit App E2E Test Suite', () => {
+    let page: AppPage;
+    let employeeListPage: EmployeeListPage;
+
+    beforeEach(() => {
+        employeeListPage = new EmployeeListPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
-  });
+    //it('should display welcome message', () => {
+    //    employeeListPage.navigateTo();
+    //    expect(employeeListPage.getTitle()).toEqual('Employee List');
+    //});
+
+
 });
