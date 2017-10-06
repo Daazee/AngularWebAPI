@@ -11,10 +11,10 @@ export class CreateEmployeeComponent implements OnInit {
 
     dependants: Dependant[];
     dependant: Dependant;
-    employeeId:number = 0;
-    showPersonal1:boolean = true;
-    showPersonal2:boolean = false;
-    showPersonal3:boolean = false;
+    employeeId: number = 0;
+    showPersonal1: boolean = true;
+    showPersonal2: boolean = false;
+    showPersonal3: boolean = false;
     employee: Employee;
     employeeImage: EmployeeImage;
     name: string;
@@ -39,7 +39,7 @@ export class CreateEmployeeComponent implements OnInit {
     }
 
     addEmployee = function (tab1Form) {
-        
+
         console.log(tab1Form);
         this.employee = tab1Form;
         if (this.employee.firstname == "") {
@@ -66,7 +66,7 @@ export class CreateEmployeeComponent implements OnInit {
         else {
             this.isGenderInvalid = false;
         }
-        if (this.employee.position == ""){
+        if (this.employee.position == "") {
             this.isPositionInvalid = true;
         }
         else {
@@ -84,35 +84,34 @@ export class CreateEmployeeComponent implements OnInit {
     }
 
     uploadPicture() {
-        this.id = 1;
-        //var employeeImage = {
-        //    employeeID = "",
-        //    Image = ""
-        //};
-        //var file = document.getElementById("imageFile").files[0];
-        //var r = new FileReader();
-        //r.onloadend = function (e) {
+        var input: any = document.getElementById("imageFile");
 
-        //    var arr = Array.from(new Uint8Array(e.target.result));
-        //    employeeImage.employeeID = this.employeeId;
-        //    employeeImage.Image = arr;
-           
+        this.employeeImage.Image = this.getImageArray(input);
+         this.employeeImage.employeeID = this.employeeId;
 
-        //    $http.post(`${baseUrl}api/EmployeeImage/UploadImage`, EmployeeImage)
-        //        .then(
-        //        function (response) {
-        //            console.log(response);
-        //        },
-
-        //        function (reason) {
-
-        //            console.log(reason);
-        //        })
-        //}
-        //r.readAsArrayBuffer(file);
+         var body = JSON.stringify(this.employeeImage);
+         this.employeeservice.UploadEmployeePicture(body).subscribe(response => this.employeeImage = response);
         this.showPersonal2 = false;
         this.showPersonal3 = true;
     }
+
+    getImageArray(image) {
+        var arr = null;
+        var input: any = image;
+        var file = input.files[0];
+        var r = new FileReader();
+        r.onloadend = function (e) {
+
+            var a: any = e.target;
+            var r = a.result;
+            var ar = new Uint8Array(r);
+            arr = new Array(ar);
+
+        }
+        r.readAsArrayBuffer(file);
+
+        return arr;
+}
 
 
     addDependant() {
@@ -122,11 +121,11 @@ export class CreateEmployeeComponent implements OnInit {
         this.employeeservice.AddEmployeeDependency(body).subscribe(response => {
             this.dependant = response;
             this.employeeservice.getEmployeeDependants(this.employeeId).subscribe(
-            data => this.dependants = data);
-               
+                data => this.dependants = data);
+
         });
-                   
-        
+
+
     }
 
 }

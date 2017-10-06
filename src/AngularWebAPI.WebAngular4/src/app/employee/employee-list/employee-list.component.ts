@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+//import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { Employee } from "../../app.component";
 

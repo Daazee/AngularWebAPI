@@ -2,7 +2,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { Employee, Dependant } from "../app.component";
+import { Employee, Dependant, EmployeeImage } from "../app.component";
 
 @Injectable()
 export class EmployeeServiceService {
@@ -62,8 +62,8 @@ export class EmployeeServiceService {
         });
     }
 
-    UploadEmployeePicture(body: any) {
-        this.http.post(this.baseUrl + 'api/EmployeeImage/UploadImage', body).subscribe(response => {
+    UploadEmployeePicture(body: any): Observable<EmployeeImage> {
+       return this.http.post(this.baseUrl + 'api/EmployeeImage/UploadImage', body).map(response => {
             return response;
         });
     }
