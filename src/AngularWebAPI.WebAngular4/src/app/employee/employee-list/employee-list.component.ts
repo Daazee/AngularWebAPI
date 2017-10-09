@@ -11,7 +11,7 @@ import { Employee } from "../../app.component";
 })
 export class EmployeeListComponent implements OnInit {
 
-    public loading = false;
+   // public loading = false;
 
     public employees: Employee[];
     public employee: Employee;
@@ -48,12 +48,13 @@ export class EmployeeListComponent implements OnInit {
   }
 
   updateEmployee(id: any) {
-      this.loading = true;
+      //this.loading = true;
       var body = JSON.stringify(this.employee);
       this._employeeService.UpdateEmployee(id, body).subscribe(data => {
-          this.employee = data;         
+          this.employee = data;    
+          location.reload();
       });      
-      location.reload();
-      this.loading = false;
+      
+      //this.loading = false;
   }
 }

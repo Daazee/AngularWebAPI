@@ -99,21 +99,21 @@
 
 
         <form class="col-md-8 col-md-offset-2" *ngIf="showPersonal2">
-            <input id="imageFile" name="file" type="file" />
+            <input id="imageFile" #fileInput name="file" type="file" />
             <input type="submit" id="showPersonal2Button" (click)="uploadPicture()" value="Next" class="btn btn-primary pull-right" />
         </form>
         <form class="col-md-8 col-md-offset-2" *ngIf="showPersonal3">
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" [(ngModel)]="dependant.firstname" class="form-control" />
+                <input type="text" [(ngModel)]="dependant.firstname" class="form-control"  [ngModelOptions]="{standalone: true}"/>
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" [(ngModel)]="dependant.lastname" class="form-control" />
+                <input type="text" [(ngModel)]="dependant.lastname" class="form-control" [ngModelOptions]="{standalone: true}" />
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <select [(ngModel)]="dependant.gender" class="form-control">
+                <select [(ngModel)]="dependant.gender" class="form-control" [ngModelOptions]="{standalone: true}">
                     <option selected="selected" value="select">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -121,7 +121,7 @@
             </div>
             <div class="form-group">
                 <label for="position">Relationship</label>
-                <select [(ngModel)]="dependant.relationship" class="form-control">
+                <select [(ngModel)]="dependant.relationship" class="form-control" [ngModelOptions]="{standalone: true}">
                     <option selected="selected" value="select">Select</option>
                     <option value="Spouse">Spouse</option>
                     <option value="Child">Child</option>

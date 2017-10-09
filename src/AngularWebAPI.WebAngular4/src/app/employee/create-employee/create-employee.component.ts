@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, FormGroup, FormControl } from '@angular/forms';
 import {Employee, Dependant, EmployeeImage } from '../../app.component';
 import { EmployeeServiceService } from '../../services/employee-service.service';
@@ -8,7 +8,7 @@ import { EmployeeServiceService } from '../../services/employee-service.service'
     styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
-
+    
     dependants: Dependant[];
     dependant: Dependant;
     employeeId: number = 0;
@@ -19,7 +19,7 @@ export class CreateEmployeeComponent implements OnInit {
     employeeImage: EmployeeImage;
     name: string;
     id: number;
-
+    @ViewChild('fileInput') fileInput;
     isFormInvalid: boolean = false;
     isFirstnameValid: boolean = false;
     isLastnameInvalid: boolean = false;
@@ -83,37 +83,6 @@ export class CreateEmployeeComponent implements OnInit {
         this.showPersonal2 = true;
     }
 
-    uploadPicture() {
-        var input: any = document.getElementById("imageFile");
-
-        this.employeeImage.Image = this.getImageArray(input);
-         this.employeeImage.employeeID = this.employeeId;
-
-         var body = JSON.stringify(this.employeeImage);
-         this.employeeservice.UploadEmployeePicture(body).subscribe(response => this.employeeImage = response);
-        this.showPersonal2 = false;
-        this.showPersonal3 = true;
-    }
-
-    getImageArray(image) {
-        var arr = null;
-        var input: any = image;
-        var file = input.files[0];
-        var r = new FileReader();
-        r.onloadend = function (e) {
-
-            var a: any = e.target;
-            var r = a.result;
-            var ar = new Uint8Array(r);
-            arr = new Array(ar);
-
-        }
-        r.readAsArrayBuffer(file);
-
-        return arr;
-}
-
-
     addDependant() {
 
         this.dependant.employeeID = this.employeeId;
@@ -127,6 +96,31 @@ export class CreateEmployeeComponent implements OnInit {
 
 
     }
+
+    uploadPicture(e) {
+        var input: any = document.getElementById("imageFile");
+        let fileBrowser = this.fileInput.nativeElement;
+        if (fileBrowser.files && fileBrowser.files[0]) {
+            var r = new FileReader();
+            r.onloadend = this._handleReaderLoaded.bind(this);
+            r.readAsArrayBuffer(fileBrowser.files[0]);
+            this.showPersonal2 = false;
+            this.showPersonal3 = true;
+        }
+    }
+
+    _handleReaderLoaded(e) {
+        var a: any = e.target;
+        var r = a.result;
+        var ar = new Uint8Array(r);
+        var arr = Array.from(ar);
+        console.log(arr);
+        this.employeeImage.Image = arr;
+        this.employeeImage.employeeID = this.employeeId;
+        var body = JSON.stringify(this.employeeImage);
+        this.employeeservice.UploadEmployeePicture(body).subscribe(response => this.employeeImage = response);
+    }
+
 
 }
 
