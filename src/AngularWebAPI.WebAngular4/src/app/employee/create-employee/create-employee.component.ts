@@ -1,12 +1,16 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, FormGroup, FormControl } from '@angular/forms';
+﻿import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { FormsModule, FormGroup, FormControl, NgForm } from '@angular/forms';
 import {Employee, Dependant, EmployeeImage } from '../../app.component';
 import { EmployeeServiceService } from '../../services/employee-service.service';
+import { AppValidationMessages } from "../../app.messages";
+
 @Component({
     selector: 'app-create-employee',
     templateUrl: './create-employee.component.html',
     styleUrls: ['./create-employee.component.css']
 })
+
+
 export class CreateEmployeeComponent implements OnInit {
     
     dependants: Dependant[];
@@ -20,12 +24,47 @@ export class CreateEmployeeComponent implements OnInit {
     name: string;
     id: number;
     @ViewChild('fileInput') fileInput;
-    isFormInvalid: boolean = false;
-    isFirstnameValid: boolean = false;
-    isLastnameInvalid: boolean = false;
-    isDOBInvalid: boolean = false;
-    isGenderInvalid: boolean = false;
-    isPositionInvalid: boolean = false;
+    @ViewChild('tab1Form') currentForm: NgForm;
+    tab1Form: NgForm;
+
+    ngAfterViewChecked() {
+        this.formChange();
+    }
+
+    formErrors = {
+        'firstname': '',
+        'lastname': '',
+        'dateOfBirth': '',
+        'gender': '',
+        'position': '',
+    };
+
+    formChange() {
+        if (this.currentForm === this.tab1Form) { return; }
+
+        this.tab1Form = this.currentForm;
+        if (this.tab1Form) {
+            this.tab1Form.valueChanges
+                .subscribe(data => this.onValueChanged());
+        }
+    }
+
+    onValueChanged() {
+        if (!this.tab1Form) { return; }
+        const form = this.tab1Form.form;
+
+        for (const field in this.formErrors) {
+            this.formErrors[field] = '';
+            const control = form.get(field);
+
+            if (control && control.dirty && !control.valid) {
+                const messages = AppValidationMessages.errorMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] = messages[key];
+                }
+            }
+        }
+    }
 
     constructor(private employeeservice: EmployeeServiceService) {
     }
@@ -38,44 +77,12 @@ export class CreateEmployeeComponent implements OnInit {
         this.employee.position = "";
     }
 
-    addEmployee = function (tab1Form) {
+    
+    
 
-        console.log(tab1Form);
-        this.employee = tab1Form;
-        if (this.employee.firstname == "") {
-            this.isFirstnameValid = true;
-        }
-        else {
-            this.isFirstnameValid = false;
-        }
-        if (this.employee.lastname == "") {
-            this.isLastnameValid = true;
-        }
-        else {
-            this.isLastnameValid = false;
-        }
-        if (this.employee.dateOfBirth == "") {
-            this.isDOBInvalid = true;
-        }
-        else {
-            this.isDOBInvalid = false;
-        }
-        if (this.employee.gender == "") {
-            this.isGenderInvalid = true;
-        }
-        else {
-            this.isGenderInvalid = false;
-        }
-        if (this.employee.position == "") {
-            this.isPositionInvalid = true;
-        }
-        else {
-            this.isPositionInvalid = false;
-        }
-        if (this.isFirstnameValid || this.isLastnameValid || this.isGenderInvalid || this.isPositionInvalid || this.isDOBInvalid) {
-            this.isFormInvalid = true;
-            return;
-        }
+    addEmployee () {
+
+        console.log(this.employee);
 
         var body = JSON.stringify(this.employee);
         this.employeeservice.AddEmployee(body).subscribe(response => this.employeeId = response);

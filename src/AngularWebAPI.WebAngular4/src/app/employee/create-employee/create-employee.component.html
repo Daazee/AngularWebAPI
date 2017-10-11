@@ -50,22 +50,31 @@
     </div>
     <div class="row">
       
-        <form class="col-md-8 col-md-offset-2" novalidate *ngIf="showPersonal1" #tab1Form="ngForm" (ngSubmit)="addEmployee(tab1Form.value)">
+        <form class="col-md-8 col-md-offset-2" *ngIf="showPersonal1" #tab1Form="ngForm" (ngSubmit)="addEmployee()">
+
+          <div *ngIf="formErrors.firstname || formErrors.lastname || formErrors.dateOfBirth || formErrors.gender || formErrors.position" class="form-group alert alert-danger">
+            <div *ngIf="formErrors.firstname" class="">{{formErrors.firstname}}</div>
+            <div *ngIf="formErrors.lastname" class="">{{formErrors.lastname}}</div>
+            <div *ngIf="formErrors.dateOfBirth" class="">{{formErrors.dateOfBirth}}</div>
+            <div *ngIf="formErrors.gender" class="">{{formErrors.gender}}</div>
+            <div *ngIf="formErrors.position" class="">{{formErrors.position}}</div>
+          </div>
+
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" name="firstname" ngModel   />
+                <input type="text" class="form-control" [ngClass]="{'.ng-invalid': formErrors.firstname}" name="firstname" [(ngModel)]="employee.firstname" required />
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" ngModel class="form-control" name="lastname" />
+                <input type="text" [(ngModel)]="employee.lastname"  class="form-control" name="lastname" required />
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date Of Birth</label>
-                <input type="date" ngModel class="form-control" name="dateOfBirth" />
+                <input type="date" [(ngModel)]="employee.dateOfBirth"  class="form-control" name="dateOfBirth" required />
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <select ngModel class="form-control" name="gender">
+                <select [(ngModel)]="employee.gender"  class="form-control" name="gender" required>
                     <option selected value="">Select gender...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -73,7 +82,7 @@
             </div>
             <div class="form-group">
                 <label for="position">Position</label>
-                <select ngModel class="form-control" name="position">
+                <select [(ngModel)]="employee.position"  class="form-control" name="position" required>
                     <option selected value="">Select position...</option>
                     <option value="Manager">Manager</option>
                     <option value="Developer">Developer</option>
@@ -81,17 +90,8 @@
                 </select>
             </div>
 
-
-          <div *ngIf="isFormInvalid" class="alert alert-danger">
-            <div *ngIf="isFirstnameValid">Firstname is required</div>
-            <div *ngIf="isLastnameValid">Lastname is required</div>
-            <div *ngIf="isDOBInvalid">Date of Birth is required</div>
-            <div *ngIf="isGenderInvalid">Gender is required</div>
-            <div *ngIf="isPositionInvalid">Position is required</div>
-          </div>
-
             <div class="">
-                <button id="showPersonal1Button" type="submit" class="btn btn-primary pull-right">Proceed to upload picture</button>
+                <button id="showPersonal1Button" [disabled]="!tab1Form.form.valid" type="submit" class="btn btn-primary pull-right">Proceed to upload picture</button>
             </div>
         </form>
 

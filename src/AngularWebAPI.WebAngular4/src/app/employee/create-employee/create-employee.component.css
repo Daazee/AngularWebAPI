@@ -1,4 +1,4 @@
-        .stepwizard-step p {
+﻿        .stepwizard-step p {
             margin-top: 10px;
         }
 
@@ -44,3 +44,7 @@
             line-height: 1.428571429;
             border-radius: 15px;
         }
+
+form.submitted .ng-invalid {
+  border: 1px solid #f00;
+}
