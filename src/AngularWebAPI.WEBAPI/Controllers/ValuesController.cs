@@ -8,6 +8,7 @@ using System.Web.Http;
 namespace AngularWebAPI.WEBAPI.Controllers
 {
     [Authorize]
+    [RoutePrefix("api/values")]
     public class ValuesController : ApiController
     {
         // GET api/values

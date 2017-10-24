@@ -1,0 +1,14 @@
+#authpage-wrapper{
+    margin-top: 150px;
+}
+
+#authpage-wrapper #loginForm{
+    border:1px dashed #ddd;;
+    padding: 50px;
+}
+
+#authpage-wrapper #loginForm button{
+    border-radius: 1px;
+    padding-left: 25px;
+    padding-right: 25px;
+}

@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿import {OAuthService,JwksValidationHandler} from 'angular-oauth2-oidc';
+import {authConfig} from './auth-config';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,13 @@
 })
 export class AppComponent {
   title = 'app';
+  constructor(private oauthService:OAuthService){
+      this.configureWithNewConfigAPi();
+  }
+  private configureWithNewConfigAPi(){
+      this.oauthService.configure(authConfig);
+      this.oauthService.setStorage(sessionStorage);
+  }
 }
 export class Employee {
     public employeeID: number;

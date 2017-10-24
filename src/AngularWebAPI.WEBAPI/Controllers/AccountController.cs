@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using AngularWebAPI.WEBAPI.Models;
 using AngularWebAPI.WEBAPI.Providers;
 using AngularWebAPI.WEBAPI.Results;
+using AngularWebAPI.DataAccess.Models;
 
 namespace AngularWebAPI.WEBAPI.Controllers
 {

@@ -29,9 +29,12 @@ namespace AngularWebAPI.Domain.Entities
         [Required(ErrorMessage = "Firstname is Required")]               
         public string Position { get; set; }
 
-        [Required(ErrorMessage = "Firstname is Required")]        
+        [Required(ErrorMessage = "Gender is required")]        
         public string Gender { get; set; }
 
         public List<Dependant> Dependants { get; set; }
+
+        [Required(ErrorMessage ="App User Id is required")]
+        public string AppUserId { get; set; }
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using AngularWebAPI.WEBAPI.Providers;
 using AngularWebAPI.WEBAPI.Models;
+using AngularWebAPI.DataAccess.DataAccess;
+using AngularWebAPI.WEBAPI.Services;
 
 namespace AngularWebAPI.WEBAPI
 {
@@ -23,7 +25,8 @@ namespace AngularWebAPI.WEBAPI
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+
+            app.CreatePerOwinContext< AngularWebAPIDataContext>(AngularWebAPIDataContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
@@ -36,10 +39,9 @@ namespace AngularWebAPI.WEBAPI
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
+                Provider = new SimpleAuthorizationServerProvider(),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                // In production mode set AllowInsecureHttp = false
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(45),
                 AllowInsecureHttp = true
             };
 

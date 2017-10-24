@@ -10,6 +10,7 @@ using AngularWebAPI.WEBAPI.Models;
 namespace AngularWebAPI.WEBAPI.Controllers
 {
     [RoutePrefix("api/Employee")]
+    [Authorize]
     public class EmployeeController : ApiController
     {
         private IEmployeeRepository Employees;
@@ -127,6 +128,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
 
         [HttpPost]
         [Route("AddEmployee")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> POST(Employee Employee)
         {
             try
@@ -139,7 +141,7 @@ namespace AngularWebAPI.WEBAPI.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Unable to Create Employee");
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
             }
             catch (Exception)

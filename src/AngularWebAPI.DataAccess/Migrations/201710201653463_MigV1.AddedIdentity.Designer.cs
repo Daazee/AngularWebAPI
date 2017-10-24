@@ -7,13 +7,13 @@ namespace AngularWebAPI.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initialTables : IMigrationMetadata
+    public sealed partial class MigV1AddedIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MigV1AddedIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709051154153_initialTables"; }
+            get { return "201710201653463_MigV1.AddedIdentity"; }
         }
         
         string IMigrationMetadata.Source
