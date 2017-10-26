@@ -1,4 +1,4 @@
-﻿namespace  AngularWebAPI.DataAccess.DataAccess
+﻿namespace  AngularWebAPI.DataAccess
 {
     public enum UserType
     {

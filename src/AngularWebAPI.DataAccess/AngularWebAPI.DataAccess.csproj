@@ -104,6 +104,14 @@
     <Compile Include="Migrations\201710201653463_MigV1.AddedIdentity.Designer.cs">
       <DependentUpon>201710201653463_MigV1.AddedIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710251429112_ModifiedEmployeeEntity.cs" />
+    <Compile Include="Migrations\201710251429112_ModifiedEmployeeEntity.Designer.cs">
+      <DependentUpon>201710251429112_ModifiedEmployeeEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710251544256_ModfEmpAddedEmailAddress.cs" />
+    <Compile Include="Migrations\201710251544256_ModfEmpAddedEmailAddress.Designer.cs">
+      <DependentUpon>201710251544256_ModfEmpAddedEmailAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -126,6 +134,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710201653463_MigV1.AddedIdentity.resx">
       <DependentUpon>201710201653463_MigV1.AddedIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710251429112_ModifiedEmployeeEntity.resx">
+      <DependentUpon>201710251429112_ModifiedEmployeeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710251544256_ModfEmpAddedEmailAddress.resx">
+      <DependentUpon>201710251544256_ModfEmpAddedEmailAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
