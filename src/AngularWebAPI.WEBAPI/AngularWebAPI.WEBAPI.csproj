@@ -237,6 +237,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDependantController.cs" />
     <Compile Include="Controllers\EmployeeImageController.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\DefaultAppUserService.cs" />
     <Compile Include="Services\IAppUserService.cs" />
     <Compile Include="Services\ServicesManager.cs" />
     <Compile Include="Startup.cs" />

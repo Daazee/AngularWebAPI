@@ -4,15 +4,13 @@ using System.Configuration;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
 using AngularWebAPI.DataAccess.Models;
 using AngularWebAPI.DataAccess.DataAccess;
+using AngularWebAPI.WEBAPI.Models.ViewModels;
+using AngularWebAPI.DataAccess;
 
 namespace AngularWebAPI.WEBAPI.Services
 {
@@ -39,142 +37,7 @@ namespace AngularWebAPI.WEBAPI.Services
         {
             return _userManager;
         }
-
-        public RoleManager<AppRole> GetRoleManager()
-        {
-            return _roleManager;
-        }
-        public MyResponseStatus CreateUser(CreateAdminUserModel model)
-        {
-            _logger.Debug("About to create new admin user " + model + " as a " + model.RoleName);
-
-            try
-            {
-                if (_userManager.FindByNameAsync(model.Email.Trim()).Result != null)
-                {
-                    _logger.Info("Admin User with username " + model.Email + " already exists in the database.");
-                    return
-                        new FailedResponseStatus("Admin User with the username " + model.Email +
-                                                 " already exists.  Please enter another email address");
-                }
-
-                var user = new ApplicationUser()
-                {
-                    FirstName = model.FirstName.Trim(),
-                    LastName = model.LastName.Trim(),
-                    PhoneNumber = model.PhoneNumber.Trim(),
-                    UserName = model.Email.Trim(),
-                    Title = model.Title,
-                    Status = AccountStatus.Active
-
-                };
-                return CreateNewUser(user, model.Password, model.RoleName);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("There was an issue creating the user", ex);
-                return new FailedResponseStatus("An error was encountered trying to create the user.  Please try again");
-            }
-        }
-
-        public void TryLogin(AdminLoginModel model, OAuthGrantResourceOwnerCredentialsContext context)
-        {
-            try
-            {
-                ApplicationUser user = _userManager.Find(model.Username, model.Password);
-                if (user == null)
-                {
-
-                    var userWithPhoneNumber = _userManager.Users.FirstOrDefault(u => u.PhoneNumber == model.Username);
-                    if (userWithPhoneNumber != null)
-                        user = _userManager.Find(userWithPhoneNumber.UserName, model.Password);
-                }
-                if (user == null)
-                {
-                    _logger.Debug("User with Username " + model.Username +
-                                 " could not be logged in possibly due to wrong credentials");
-                    context.SetError("invalid_grant", "Username or Password incorrect. Please try again.");
-                    return;
-                }
-
-
-                using (var tokenService = ServicesManager.GetTokenService())
-                {
-                    var tempPasswordToken = tokenService.GetToken(user.Id);
-                    if (tempPasswordToken != null && tokenService.IsExpired(tempPasswordToken.Id))
-                    {
-                        _auditLogger.SaveAdminLog(new AuditLog(user.Id, user.FirstName + " " + user.LastName, user.Email,
-                            "LOGIN", "Attempt to Login with an expired token failed"));
-                        context.SetError("Invalid_grant", "Your temporary Password has expired. Please reset your account to Reactivate");
-                        return;
-                    }
-                }
-
-
-                if (user.Status == AccountStatus.Disabled)
-                {
-                    _logger.Debug("User " + user +
-                        " could not be logged in because this user has been disabled");
-                    _auditLogger.SaveAdminLog(new AuditLog(user.Id, user.FirstName + " " + user.LastName, user.Email,
-                            "LOGIN", "Account is disabled : Login attempt Failed"));
-
-                    context.SetError("invalid_grant", "Your account has been disabled.  Please contact the Super Administrator.");
-                    return;
-                }
-
-                if (_userManager.IsLockedOut(user.Id))
-                {
-                    _logger.Debug("User " + user +
-                       " could not be logged in because this account has been locked out");
-                    context.SetError("invalid_grant", "Your account has been locked as you have reached the maximum failed login attempts.  Please contact the Super Administrator.");
-                    return;
-                }
-
-                var claimsidentity = new ClaimsIdentity(context.Options.AuthenticationType);
-                //AddClaims(user, claimsidentity);
-                claimsidentity.AddClaim(new Claim("sub", context.UserName));
-                claimsidentity.AddClaim(new Claim(ClaimTypes.Email, user.UserName));
-                claimsidentity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-                claimsidentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-
-
-                _logger.Debug("User " + user + " successfully logged in");
-                context.Validated(claimsidentity);
-                _userManager.ResetAccessFailedCount(user.Id);
-
-
-                var roles = new StringBuilder();
-                foreach (string role in _userManager.GetRoles(user.Id))
-                {
-                    claimsidentity.AddClaim(new Claim(ClaimTypes.Role, role));
-                    roles.Append(role + ';');
-                }
-
-                roles = roles.ToString().EndsWith(";") ? roles.Remove(roles.Length - 1, 1) : roles;
-                var authProperties = new Dictionary<string, string>
-                {
-                    {"IsFirstTimeLogin", user.IsFirstTimeLogin.ToString()},
-                    {"Roles", roles.ToString()}
-                };
-
-                // var rolesn = String.Concat(accountService.GetUserRoles(userInfo));
-
-
-                var props = new AuthenticationProperties(authProperties);
-                var authTicket = new AuthenticationTicket(claimsidentity, props);
-
-                _auditLogger.SaveAdminLog(new AuditLog(user.Id, user.FirstName + " " + user.LastName, user.Email,
-                            "LOGIN", "Logged In with valid account details"));
-                context.Validated(authTicket);
-                return;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("An exception occurred trying to login user with username " + model.Username, ex);
-                context.SetError("invalid_grant", "An error occurred trying to log in.");
-            }
-        }
+        
 
         public ApplicationUser FindUserByEmail(string email)
         {
@@ -192,25 +55,22 @@ namespace AngularWebAPI.WEBAPI.Services
             return _userManager.Users.FirstOrDefault(u => u.Email == username || u.PhoneNumber == username);
         }
 
-        public MyResponseStatus ResetPassword(string userId)
+        public bool ResetPassword(string userId)
         {
             var user = _userManager.FindById(userId);
             if (user == null)
-                return new FailedResponseStatus("Cannot Find User with");
+                return false;
 
-            var tempPassword = PasswordManager.GeneratePassword(12);
+            var tempPassword = Guid.NewGuid().ToString("N").Substring(0,11);
             var removePassword = _userManager.RemovePassword(user.Id);
 
             if (removePassword == null || !removePassword.Succeeded)
-                return new FailedResponseStatus("Reset Pasword Operation Failed");
-            var addTempPassword = _userManager.AddPassword(user.Id, tempPassword);
-            if (addTempPassword.Succeeded)
-            {
-                user.IsFirstTimeLogin = true;
-                user.Status = AccountStatus.Active;
-                _userManager.Update(user);
-            }
+                return false;
+            var addTempPasswordResult = _userManager.AddPassword(user.Id, tempPassword);
+            if (!addTempPasswordResult.Succeeded)
+                return false;
 
+            /*
             var mailMsg = new EmailModel
             {
                 Message =
@@ -222,8 +82,8 @@ namespace AngularWebAPI.WEBAPI.Services
                 Recipeint = user.Email,
                 Subject = "Reset Password: Simple Invest"
             };
-            EmailService.SendSimpleMail(mailMsg);
-            return new SuccessResponseStatus();
+            EmailService.SendSimpleMail(mailMsg); */
+            return true;
         }
         public IdentityResult ChangePassword(string id, ChangePasswordVm model)
         {
@@ -231,17 +91,7 @@ namespace AngularWebAPI.WEBAPI.Services
 
             if (result.Succeeded)
             {
-                var user = _userManager.FindById(id);
-                if (user != null)
-                {
-                    user.IsFirstTimeLogin = false;
-                    user.Status = AccountStatus.Active;
-                    result = _userManager.Update(user);
-                    if (result.Succeeded)
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
             return null;
 
@@ -285,32 +135,23 @@ namespace AngularWebAPI.WEBAPI.Services
             return _userManager.GetRoles(userId);
         }
 
-        public async Task<UserResult> Create(ApplicationUser user, string role = "", string passWord = "")
+        public ApplicationUser Create(ApplicationUser user, string role = "", string passWord = "")
         {
             try
             {
 
-                user.IsFirstTimeLogin = true;
+                //user.IsFirstTimeLogin = true;
                 var password = passWord;
                 if (string.IsNullOrEmpty(password))
                 {
-                    password = PasswordManager.GeneratePassword(8);
+                    password = Guid.NewGuid().ToString("N").Substring(0, 8);
                 }
                 var result = _userManager.Create(user, password);
                 if (string.IsNullOrEmpty(role) || !result.Succeeded)
-                    return new UserResult
-                    {
-                        Errors = result.Errors.ToList(),
-                        Succeeded = result.Succeeded
-                    };
+                    return null;
                 AddUserToRole(user.Id, role);
-                await EmailService.SendEmailToUser(user, password);
-
-                return new UserResult
-                {
-                    Errors = result.Errors.ToList(),
-                    Succeeded = result.Succeeded
-                };
+                //await EmailService.SendEmailToUser(user, password);
+                return user;
 
             }
             catch (DbEntityValidationException e)
@@ -328,11 +169,7 @@ namespace AngularWebAPI.WEBAPI.Services
                     }
                 }
 
-                return new UserResult
-                {
-                    ProprtyName = name,
-                    Message = msg
-                };
+                return null;
             }
         }
 
@@ -343,7 +180,7 @@ namespace AngularWebAPI.WEBAPI.Services
 
         public IEnumerable<ApplicationUser> GetUsers(UserType userType)
         {
-            return _userManager.Users.Where(u => u.UserType == userType);
+            return _userManager.Users.Where(u => u.AccountType == userType);
         }
 
         public IEnumerable<ApplicationUser> GetUsers(string type)
@@ -353,12 +190,12 @@ namespace AngularWebAPI.WEBAPI.Services
             var userList = _userManager.Users;
             switch (type)
             {
-                case "Broker":
-                    return userList.Where(u => u.UserType == UserType.Broker);
+                case "User":
+                    return userList.Where(u => u.AccountType == UserType.User);
                 case "Admin":
-                    return userList.Where(u => u.UserType == UserType.Admin);
+                    return userList.Where(u => u.AccountType == UserType.Admin);
                 case "Super Admin":
-                    return userList.Where(u => u.UserType == UserType.SuperAdmin);
+                    return userList.Where(u => u.AccountType == UserType.SuperAdmin);
                 default:
                     return new List<ApplicationUser>();
             }
@@ -370,48 +207,7 @@ namespace AngularWebAPI.WEBAPI.Services
             return userList.Where(fiterExpression);
         }
 
-
-        public UserResult Update(ApplicationUser updatedUser)
-        {
-
-            using (var ctx = _userManager)
-            {
-                var user = ctx.FindById(updatedUser.Id);
-                //Mapper.Map(updatedUser, user);
-                user.Status = updatedUser.Status;
-                user.FirstName = updatedUser.FirstName;
-                user.LastName = updatedUser.LastName;
-                user.PhoneNumber = updatedUser.PhoneNumber;
-                if (updatedUser.DateOfBirth.HasValue)
-                    user.DateOfBirth = updatedUser.DateOfBirth;
-                if (updatedUser.State.HasValue)
-                    user.State = updatedUser.State;
-                if (updatedUser.Gender.HasValue)
-                    user.Gender = updatedUser.Gender;
-                var result = ctx.Update(user);
-
-                return new UserResult
-                {
-                    Succeeded = result.Succeeded,
-                    Errors = result.Errors.ToList()
-                };
-            }
-
-        }
-        private void AddClaims(ApplicationUser user, ClaimsIdentity identity)
-        {
-            var role = _roleManager.Roles.ToList().Single(r => r.Id == user.Roles.First().RoleId);
-
-            /*
-             claimsidentity.AddClaim(new Claim("RoleName", role.Name));
-            claimsidentity.AddClaim(new Claim("IsAdmin", role.IsAdmin.ToString()));
-            claimsidentity.AddClaim(new Claim("Title", user.Title.ToString()));
-            claimsidentity.AddClaim(new Claim("FirstName", user.FirstName));
-            claimsidentity.AddClaim(new Claim("LastName", user.LastName));
-             */
-
-        }
-
+        /*
         private MyResponseStatus CreateNewUser(ApplicationUser user, string password, string roleName)
         {
             IdentityResult result = _userManager.Create(user, password);
@@ -451,7 +247,7 @@ namespace AngularWebAPI.WEBAPI.Services
             }
             return new FailedResponseStatus("The user could not be created.  Please try again.");
         }
-
+        */
 
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using AngularWebAPI.DataAccess.DataAccess;
 using AngularWebAPI.WEBAPI.Models.ViewModels;
 using AngularWebAPI.DataAccess.Models;
+using AngularWebAPI.DataAccess;
 
 namespace AngularWebAPI.WEBAPI.Services
 {

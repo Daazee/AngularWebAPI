@@ -16,6 +16,7 @@ namespace AngularWebAPI.WEBAPI.App_Start
     using System.Web.Http;
     using WebApiContrib.IoC.Ninject;
     using Abstractions.Configuration;
+    using Services;
 
     public static class NinjectWebCommon 
     {
@@ -77,10 +78,11 @@ namespace AngularWebAPI.WEBAPI.App_Start
             }
             else
             {
-                kernel.Bind<DbContext>().To<AngularWebAPI.DataAccess.DataAccess.AngularWebAPIDataContext>();
-                kernel.Bind<IEmployeeRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeRepository>();
-                kernel.Bind<IEmployeeDependantRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeDependantRepository>();
-                kernel.Bind<IEmployeeImageRepository>().To<AngularWebAPI.DataAccess.EFRepository.EmployeeImageRepository>();
+                kernel.Bind<DbContext>().To<AngularWebAPIDataContext>();
+                kernel.Bind<IEmployeeRepository>().To<DataAccess.EFRepository.EmployeeRepository>();
+                kernel.Bind<IEmployeeDependantRepository>().To<DataAccess.EFRepository.EmployeeDependantRepository>();
+                kernel.Bind<IEmployeeImageRepository>().To<DataAccess.EFRepository.EmployeeImageRepository>();
+                kernel.Bind<IAppUserService>().To<DefaultAppUserService>();
             }
 
 
