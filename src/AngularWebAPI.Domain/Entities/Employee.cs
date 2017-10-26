@@ -23,6 +23,10 @@ namespace AngularWebAPI.Domain.Entities
         [StringLength(50, ErrorMessage = "Maximum required string length is 50")]
         public string Lastname { get; set; }
 
+        [Required(ErrorMessage ="Email Address is required")]
+        [DataType(DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
+
         public DateTime DateOfBirth { get; set; }
 
 
@@ -33,8 +37,7 @@ namespace AngularWebAPI.Domain.Entities
         public string Gender { get; set; }
 
         public List<Dependant> Dependants { get; set; }
-
-        [Required(ErrorMessage ="App User Id is required")]
+        
         public string AppUserId { get; set; }
     }
 }
