@@ -18,6 +18,7 @@ export class AppComponent {
   }
 }
 export class Employee {
+    public EmailAddress:string
     public employeeID: number;
     public firstname: string;
     public lastname: string;

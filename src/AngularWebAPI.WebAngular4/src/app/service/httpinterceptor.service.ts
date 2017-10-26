@@ -27,14 +27,9 @@ export class HttpinterceptorService implements HttpInterceptor {
 }
 @Injectable()
 export class HttpResponseInterceptor implements HttpInterceptor{
-
-    //private router:Router;
     constructor(private router:Router){
-
     }
     intercept(request:HttpRequest<any>,next:HttpHandler){
-        //let injector=ReflectiveInjector.resolveAndCreate([Router]);
-        //let router=injector.get(Router)
         return next.handle(request).do(
             (event:HttpEvent<any>)=>{
                 // do nothing on success

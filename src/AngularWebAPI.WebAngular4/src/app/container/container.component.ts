@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../services/auth-service';
 
 @Component({
   selector: 'app-container',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
-  constructor() { }
+  private loggedInUser:string
+  constructor(private authenticationService:AuthService) { }
 
   ngOnInit() {
+    var userData=this.authenticationService.loadUserInfo();
+    var appUserInfo=userData.userInfo;
+    if(appUserInfo)
+      this.loggedInUser=appUserInfo["email"];
+  }
+
+  logOutUser():void{
+    this.authenticationService.logOut();
   }
 
 }
