@@ -25,7 +25,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a routerLink="/users">Platform Admins</a></li>
         <li *ngIf="loggedInUser"><a href="">{{loggedInUser}}</a></li>
-        <li *ngIf="loggedInUser"><a href="" class="btn btn-danger btn-sm" (click)='logOutUser()'>Log-Out</a></li>
+        <li *ngIf="loggedInUser"><a href="" (click)='logOutUser()'>Log-Out</a></li>
       </ul>
     </div>
   </div>

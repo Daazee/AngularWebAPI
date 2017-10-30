@@ -17,6 +17,7 @@ import { EmployeeListComponent } from './employee/employee-list/employee-list.co
 import { CreateEmployeeComponent } from './employee/create-employee/create-employee.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import {AuthComponent} from './auth/auth.component';
+import {UsersComponent} from './users/users.component'
 
 
 //decorator
@@ -27,7 +28,8 @@ import {AuthComponent} from './auth/auth.component';
         EmployeeListComponent,
         CreateEmployeeComponent,
         EmployeeDetailComponent,
-        AuthComponent
+        AuthComponent,
+        UsersComponent
     ],
     imports: [ //importing modules
         BrowserModule,

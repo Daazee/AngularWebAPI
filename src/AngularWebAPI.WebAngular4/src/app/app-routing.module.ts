@@ -5,13 +5,15 @@ import { CreateEmployeeComponent } from './employee/create-employee/create-emplo
 import { EmployeeDetailComponent } from "./employee/employee-detail/employee-detail.component";
 import {AuthComponent} from './auth/auth.component';
 import {OnlyAdminUsers} from './services/role-guard-service';
+import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/EmployeeList', pathMatch: 'full' },
     { path: 'EmployeeList', component: EmployeeListComponent,},
     { path: 'AddEmployee', component: CreateEmployeeComponent },
     { path: 'EmployeeDetail/:id', component: EmployeeDetailComponent,canActivate:[OnlyAdminUsers]},
-    { path: 'login', component: AuthComponent}
+    { path: 'login', component: AuthComponent},
+    { path:'users', component:UsersComponent, canActivate:[OnlyAdminUsers]}
 ];
 
 @NgModule({

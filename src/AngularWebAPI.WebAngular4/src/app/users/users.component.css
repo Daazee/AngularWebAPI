@@ -1,0 +1,30 @@
+#authpage-wrapper{
+    margin-top: 150px;
+}
+
+#authpage-wrapper #loginForm{
+    padding: 50px;padding-top: 10px;
+}
+
+#authpage-wrapper #loginForm button{
+    border-radius: 1px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#authpage-wrapper #loginForm .form-control{
+    border-radius: 1px ;
+}
+#authpage-wrapper fieldset{
+    border:1px dashed #ddd;
+}
+#authpage-wrapper legend{
+  
+    padding: 0.2em 0.5em;
+    border: 1px dashed #ddd;
+    color: green;
+    width: auto;
+    margin-left: 20px;
+    font-size: 14px;
+  
+}

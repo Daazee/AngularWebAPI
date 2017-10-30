@@ -1,0 +1,38 @@
+<div class="row" id="authpage-wrapper">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1 col-xs-12">
+            <table class="table table-responsive table-bordered" name="tableName">
+                <thead>
+                    <tr>
+                        <th>Lastname</th>
+                        <th>Firstname</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Account Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of usersList">
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.userName }}</td>
+                        <td>{{ getUserTypeString(user.accountType)}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"
+                                    id="optionMenuButton"> Manage </button>
+                                <div class="dropdown-menu" aria-labelledby="optionMenuButton">
+                                    <a class="dropdown-item" (click)="viewUserDetail(user)" href="#">View </a>
+                                    <a class="dropdown-item" (click)="viewUserDetail(user)" href="#">Suspend</a>
+                                    <a class="dropdown-item" (click)="viewUserDetail(user)" href="#">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

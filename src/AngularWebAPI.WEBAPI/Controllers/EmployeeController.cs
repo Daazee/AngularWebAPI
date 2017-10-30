@@ -214,7 +214,8 @@ private ApplicationUser CreateApplicationUserFromEmployeData(Employee employeein
         FirstName = employeeinfo.Firstname,
         LastName = employeeinfo.Lastname,
         Email = employeeinfo.EmailAddress,
-        UserName = employeeinfo.EmailAddress
+        UserName = employeeinfo.EmailAddress,
+        AccountType=DataAccess.UserType.User
     };
 }
         #endregion

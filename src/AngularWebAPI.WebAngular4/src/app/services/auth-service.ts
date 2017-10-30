@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { HttpClient} from '@angular/common/http'
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private oauthService: OAuthService, private storageService: LocalStorageService) {
+    constructor(private oauthService: OAuthService, private storageService: LocalStorageService, private http:HttpClient) {
 
     }
     login(username: string, password: string): Promise<object> {
@@ -35,6 +36,11 @@ export class AuthService {
             userInfo: userInfo,
             userRole: userRole
         };
+    }
+
+    loadUsers():Promise<object>{
+        let usersListApiUrl="http://localhost:18558/api/accounts";
+        return this.http.get(usersListApiUrl).toPromise<object>();
     }
 
     logOut(){
